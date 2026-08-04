@@ -11,15 +11,6 @@
         - Preto 10%  (textos, bordas, elementos de contraste)
     -->
     <style>
-        :root {
-            --yellow: #FFC107;
-            --orange: #F57C00;
-            --black: #1E1E1E;
-            --white: #ffffff;
-            --shadow-orange: 0 12px 30px rgba(245, 124, 0, 0.35);
-            --transition: 0.35s cubic-bezier(0.25, 0.8, 0.25, 1.2);
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -28,46 +19,28 @@
 
         body {
             font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: #0f0f0f;
+            background: #0f0f0f; /* fallback preto */
             color: #1e1e1e;
             line-height: 1.6;
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
+        /* Container principal com fundo amarelo predominante em algumas áreas */
         .page-wrapper {
-            background-color: var(--yellow);
+            background-color: #FFC107; /* amarelo 60% de fundo geral */
             position: relative;
         }
 
-        /* ---------- Header ---------- */
+        /* ---------- Header / Identidade ---------- */
         .top-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1.2rem 5%;
-            background: rgba(255, 193, 7, 0.75);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
+            padding: 1.5rem 4%;
+            background: rgba(0,0,0,0.05);
+            backdrop-filter: blur(8px);
             flex-wrap: wrap;
             gap: 1rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            transition: background 0.3s, box-shadow 0.3s;
-            border-bottom: 1px solid rgba(245, 124, 0, 0.2);
-        }
-
-        .top-header.scrolled {
-            background: rgba(30, 30, 30, 0.9);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-        }
-        .top-header.scrolled .brand-name {
-            color: var(--yellow);
-            border-color: var(--orange);
-        }
-        .top-header.scrolled .logo-placeholder {
-            border-color: var(--yellow);
         }
 
         .brand-area {
@@ -77,96 +50,51 @@
         }
 
         .logo-placeholder {
-            width: 55px;
-            height: 55px;
-            background: var(--black);
+            width: 60px;
+            height: 60px;
+            background: #1e1e1e;
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--yellow);
+            color: #FFC107;
             font-weight: 700;
-            font-size: 1.3rem;
-            border: 2px dashed var(--orange);
-            transition: 0.3s;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-            100% { transform: translateY(0px); }
+            font-size: 1.2rem;
+            border: 2px dashed #F57C00;
+            transition: 0.2s;
         }
 
         .brand-name {
-            font-size: 1.7rem;
+            font-size: 1.8rem;
             font-weight: 800;
             letter-spacing: -0.5px;
-            color: var(--black);
-            background: rgba(255,255,255,0.3);
-            padding: 0.3rem 1.4rem;
+            color: #1e1e1e;
+            background: rgba(255,255,255,0.25);
+            padding: 0.3rem 1.2rem;
             border-radius: 12px;
-            border: 2px dashed var(--black);
+            border: 2px dashed #1e1e1e;
             text-transform: uppercase;
-            backdrop-filter: blur(5px);
-            transition: 0.3s;
         }
 
-        .header-actions {
-            display: flex;
-            gap: 0.7rem;
-        }
-        .btn-header {
-            padding: 0.5rem 1.3rem;
-            border-radius: 40px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: var(--transition);
-            border: 2px solid transparent;
-        }
-        .btn-header-outline {
-            border-color: var(--black);
-            color: var(--black);
-            background: transparent;
-        }
-        .btn-header-outline:hover {
-            background: var(--black);
-            color: var(--yellow);
-        }
-        .btn-header-orange {
-            background: var(--orange);
-            color: white;
-            border-color: var(--orange);
-            box-shadow: 0 4px 12px rgba(245,124,0,0.5);
-        }
-        .btn-header-orange:hover {
-            background: #d96c00;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 18px rgba(245,124,0,0.6);
-        }
-
-        /* ---------- Hero ---------- */
+        /* ---------- Hero com imagem de fundo ---------- */
         .hero-section {
             position: relative;
             width: 100%;
-            min-height: 90vh;
+            min-height: 85vh;
             background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center 30%;
-            background-attachment: fixed;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
         }
 
+        /* Overlay amarelo semi-transparente (60% da sensação amarela) */
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(255,193,7,0.9) 0%, rgba(245,124,0,0.75) 100%);
+            background: linear-gradient(135deg, rgba(255,193,7,0.85) 0%, rgba(245,124,0,0.7) 100%);
             z-index: 1;
         }
 
@@ -177,271 +105,208 @@
             width: 90%;
             text-align: center;
             padding: 2rem 1rem;
-            animation: fadeInUp 1s ease;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .hero-badge {
             display: inline-block;
-            background: var(--orange);
+            background: #F57C00;
             color: white;
-            padding: 0.5rem 2rem;
+            padding: 0.4rem 1.8rem;
             border-radius: 50px;
             font-weight: 700;
             font-size: 0.9rem;
-            letter-spacing: 1.5px;
-            margin-bottom: 1.8rem;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
             text-transform: uppercase;
             backdrop-filter: blur(4px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(245,124,0,0.5); }
-            70% { box-shadow: 0 0 0 15px rgba(245,124,0,0); }
-            100% { box-shadow: 0 0 0 0 rgba(245,124,0,0); }
         }
 
         .hero-title {
-            font-size: clamp(2.8rem, 7vw, 4.8rem);
+            font-size: clamp(2.8rem, 7vw, 4.5rem);
             font-weight: 900;
             line-height: 1.1;
-            color: var(--black);
-            text-shadow: 2px 2px 15px rgba(255,255,255,0.3);
-            margin-bottom: 1.5rem;
+            color: #1e1e1e;
+            text-shadow: 2px 2px 10px rgba(255,255,255,0.3);
+            margin-bottom: 1.2rem;
         }
+
         .hero-title span {
-            color: white;
-            background: var(--orange);
-            padding: 0.1rem 0.4rem;
+            color: #ffffff;
+            background: #F57C00;
+            padding: 0 0.3rem;
             display: inline-block;
             transform: rotate(-1deg);
-            border-radius: 4px;
         }
 
         .hero-description {
-            font-size: 1.25rem;
-            max-width: 650px;
-            margin: 0 auto 2.5rem;
-            color: var(--black);
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: #1e1e1e;
             font-weight: 500;
-            background: rgba(255,255,255,0.3);
-            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(5px);
             padding: 1.2rem 2rem;
             border-radius: 20px;
-            border-left: 5px solid var(--orange);
+            border-left: 5px solid #F57C00;
         }
 
+        /* Botões de ação com links para as páginas solicitadas */
         .hero-buttons {
             display: flex;
             flex-wrap: wrap;
             gap: 1.2rem;
             justify-content: center;
+            margin-top: 1rem;
         }
 
         .btn {
-            padding: 0.95rem 2.5rem;
+            padding: 0.9rem 2.2rem;
             border-radius: 50px;
             font-weight: 700;
             font-size: 1rem;
             text-transform: uppercase;
             letter-spacing: 0.8px;
+            cursor: pointer;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            transition: var(--transition);
+            transition: all 0.3s ease;
             border: 2px solid transparent;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255,255,255,0.2);
-            transform: translateX(-100%);
-            transition: transform 0.4s;
-        }
-        .btn:hover::after {
-            transform: translateX(0);
         }
 
         .btn-create {
-            background: var(--orange);
+            background: #F57C00; /* laranja 30% */
             color: white;
-            box-shadow: var(--shadow-orange);
+            box-shadow: 0 10px 25px rgba(245,124,0,0.5);
         }
+
         .btn-create:hover {
-            background: #e06b00;
-            transform: translateY(-4px);
-            box-shadow: 0 18px 40px rgba(245,124,0,0.6);
+            background: #d96c00;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(245,124,0,0.6);
         }
 
         .btn-login {
-            background: var(--black);
-            color: var(--yellow);
-            border-color: var(--black);
+            background: #1e1e1e; /* preto 10% */
+            color: #FFC107;
+            border-color: #1e1e1e;
         }
+
         .btn-login:hover {
             background: #2c2c2c;
-            border-color: var(--orange);
             color: white;
-            transform: translateY(-4px);
+            border-color: #F57C00;
         }
 
         .btn-manager {
             background: transparent;
-            color: var(--black);
-            border: 2px solid var(--black);
-            backdrop-filter: blur(6px);
+            color: #1e1e1e;
+            border: 2px solid #1e1e1e;
+            backdrop-filter: blur(4px);
             font-weight: 700;
         }
+
         .btn-manager:hover {
-            background: var(--black);
-            color: var(--yellow);
-            border-color: var(--black);
-            transform: translateY(-4px);
+            background: #1e1e1e;
+            color: #FFC107;
+            border-color: #1e1e1e;
         }
 
-        /* ---------- Seção de informações ---------- */
+        /* ---------- Seção de informações (elogiando a academia) ---------- */
         .info-section {
-            background: var(--yellow);
-            padding: 5rem 5% 4rem;
+            background: #FFC107; /* amarelo 60% */
+            padding: 4rem 4% 3rem;
             position: relative;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.7rem;
-            font-weight: 900;
-            color: var(--black);
-            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1e1e1e;
+            margin-bottom: 2.5rem;
             position: relative;
-            letter-spacing: -0.5px;
         }
+
         .section-title::after {
             content: '';
             display: block;
             width: 80px;
             height: 5px;
-            background: var(--orange);
-            margin: 1rem auto 0;
+            background: #F57C00;
+            margin: 0.8rem auto 0;
             border-radius: 5px;
         }
 
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 2.5rem;
-            max-width: 1150px;
+            gap: 2rem;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
         .feature-card {
-            background: rgba(255,255,255,0.35);
-            backdrop-filter: blur(15px);
-            border-radius: 28px;
-            padding: 2.5rem 1.5rem;
+            background: rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 2rem 1.5rem;
             text-align: center;
-            border: 1px solid rgba(245,124,0,0.25);
-            transition: var(--transition);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s;
+            border: 1px solid rgba(245,124,0,0.2);
+            transition: 0.3s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
         }
-        .feature-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+
         .feature-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255,255,255,0.6);
-            border-color: var(--orange);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transform: translateY(-8px);
+            background: rgba(255,255,255,0.5);
+            border-color: #F57C00;
         }
 
         .feature-icon {
-            font-size: 3rem;
+            font-size: 2.8rem;
             margin-bottom: 1rem;
-            color: var(--orange);
+            color: #F57C00;
         }
+
         .feature-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            color: var(--black);
+            color: #1e1e1e;
             margin-bottom: 0.8rem;
         }
+
         .feature-card p {
             color: #2c2c2c;
             font-weight: 500;
+            line-height: 1.5;
         }
 
-        /* Depoimento */
+        /* Depoimento rápido (elogiando) */
         .testimonial-strip {
-            background: var(--black);
-            color: var(--yellow);
-            padding: 2rem 5%;
+            background: #1e1e1e; /* preto 10% */
+            color: #FFC107;
+            padding: 1.8rem 4%;
             text-align: center;
             font-style: italic;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 500;
-            margin-top: 3rem;
-            border-top: 4px solid var(--orange);
-            border-bottom: 4px solid var(--orange);
-            position: relative;
+            margin-top: 2rem;
+            border-top: 4px solid #F57C00;
+            border-bottom: 4px solid #F57C00;
         }
-        .testimonial-strip::before {
-            content: "“";
-            font-size: 5rem;
-            position: absolute;
-            left: 5%;
-            top: -20px;
-            color: var(--orange);
-            opacity: 0.6;
-        }
+
         .testimonial-strip span {
             font-weight: 800;
             color: white;
         }
 
-        /* Contador de alunos (extra) */
-        .stats-section {
-            background: var(--orange);
-            padding: 3rem 5%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 3rem;
-            color: white;
-            text-align: center;
-        }
-        .stat-item h3 {
-            font-size: 3rem;
-            font-weight: 900;
-            margin-bottom: 0.3rem;
-        }
-        .stat-item p {
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
+        /* Footer simples */
         .footer-mini {
             text-align: center;
-            padding: 1.5rem;
+            padding: 1.2rem;
             background: #0f0f0f;
             color: #ccc;
             font-size: 0.85rem;
@@ -455,28 +320,22 @@
             .brand-name {
                 font-size: 1.3rem;
             }
-            .hero-section {
-                background-attachment: scroll;
-            }
         }
     </style>
 </head>
 <body>
     <div class="page-wrapper">
-        <!-- Header -->
-        <header class="top-header" id="header">
+        <!-- Cabeçalho com logo e nome (placeholders) -->
+        <header class="top-header">
             <div class="brand-area">
                 <div class="logo-placeholder" title="Espaço para logo">🏋️</div>
                 <div class="brand-name" title="Nome da academia">NOME DA ACADEMIA</div>
             </div>
-            <div class="header-actions">
-                <a href="10.html" class="btn-header btn-header-orange">Criar Conta</a>
-                <a href="100.html" class="btn-header btn-header-outline">Entrar</a>
-                <a href="1000.html" class="btn-header btn-header-outline">Gestor</a>
-            </div>
+            <!-- pequeno espaço extra para manter simetria -->
+            <div style="width:60px;"></div>
         </header>
 
-        <!-- Hero -->
+        <!-- Hero com imagem de fundo e overlay amarelo -->
         <section class="hero-section">
             <div class="hero-overlay"></div>
             <div class="hero-content">
@@ -490,6 +349,7 @@
                     todos os níveis. Aqui o foco é você – do primeiro passo 
                     até a superação diária.
                 </p>
+                <!-- Botões conforme solicitado -->
                 <div class="hero-buttons">
                     <a href="10.html" class="btn btn-create">✨ Criar Conta</a>
                     <a href="100.html" class="btn btn-login">🔐 Entrar na Conta</a>
@@ -498,7 +358,7 @@
             </div>
         </section>
 
-        <!-- Diferenciais -->
+        <!-- Mais informações elogiando a academia -->
         <section class="info-section">
             <h2 class="section-title">Por que treinar conosco?</h2>
             <div class="features-grid">
@@ -524,89 +384,21 @@
                 </div>
             </div>
 
+            <!-- Depoimento rápido (mais elogios) -->
             <div class="testimonial-strip">
                 “Estrutura impecável, equipe atenciosa e resultados que aparecem. 
                 <span>A melhor academia da região!</span>” – Membro desde 2023
             </div>
         </section>
 
-        <!-- Números (contador animado) -->
-        <section class="stats-section">
-            <div class="stat-item">
-                <h3><span class="counter" data-target="1250">0</span>+</h3>
-                <p>Alunos ativos</p>
-            </div>
-            <div class="stat-item">
-                <h3><span class="counter" data-target="45">0</span>+</h3>
-                <p>Aulas por semana</p>
-            </div>
-            <div class="stat-item">
-                <h3><span class="counter" data-target="98">0</span>%</h3>
-                <p>Satisfação</p>
-            </div>
-        </section>
-
+        <!-- Rodapé discreto -->
         <footer class="footer-mini">
             © <span id="year"></span> [Nome da Academia] · Todos os direitos reservados.
         </footer>
     </div>
 
     <script>
-        // Ano dinâmico
         document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Header com efeito ao scroll
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            header.classList.toggle('scrolled', window.scrollY > 50);
-        });
-
-        // Animação de entrada dos cards (Intersection Observer)
-        const cards = document.querySelectorAll('.feature-card');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' });
-
-        cards.forEach(card => observer.observe(card));
-
-        // Contador animado
-        const counters = document.querySelectorAll('.counter');
-        const speed = 200; // quanto menor, mais rápido
-
-        const animateCounter = () => {
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const updateCount = () => {
-                    const current = +counter.innerText;
-                    const increment = target / speed;
-                    if (current < target) {
-                        counter.innerText = Math.ceil(current + increment);
-                        setTimeout(updateCount, 15);
-                    } else {
-                        counter.innerText = target;
-                    }
-                };
-                updateCount();
-            });
-        };
-
-        // Iniciar contador quando a seção stats estiver visível
-        const statsSection = document.querySelector('.stats-section');
-        let counted = false;
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !counted) {
-                    animateCounter();
-                    counted = true;
-                }
-            });
-        }, { threshold: 0.5 });
-
-        if (statsSection) statsObserver.observe(statsSection);
     </script>
 </body>
 </html>
