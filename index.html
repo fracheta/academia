@@ -1,387 +1,404 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Academia | Boas-vindas</title>
-  <!-- 
-    PALETA DE CORES (proporção visual):
-    - Amarelo 60% (fundo principal, áreas amplas)
-    - Laranja 30% (blocos de destaque, botões, detalhes)
-    - Preto 10%  (textos, linhas, ícones)
-  -->
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Academia | Boas-vindas</title>
+    <!-- 
+        Paleta de cores (proporção visual):
+        - Amarelo 60% (overlay, fundos, detalhes amplos)
+        - Laranja 30% (botões, ícones, destaques)
+        - Preto 10%  (textos, bordas, elementos de contraste)
+    -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
-      background: #FFC107; /* amarelo base 60% */
-      color: #1E1E1E; /* preto suave para texto */
-      line-height: 1.5;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-      margin: 0;
-    }
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0f0f0f; /* fallback preto */
+            color: #1e1e1e;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
 
-    /* Container principal - fundo amarelo predominante */
-    .welcome-screen {
-      width: 100%;
-      max-width: 1200px;
-      background-color: #FFC107; /* 60% amarelo */
-      border-radius: 2.5rem;
-      overflow: hidden;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
+        /* Container principal com fundo amarelo predominante em algumas áreas */
+        .page-wrapper {
+            background-color: #FFC107; /* amarelo 60% de fundo geral */
+            position: relative;
+        }
 
-    /* Faixa decorativa laranja no topo (representa parte dos 30%) */
-    .top-accent {
-      height: 8px;
-      background: #F57C00; /* laranja intenso */
-      width: 100%;
-    }
+        /* ---------- Header / Identidade ---------- */
+        .top-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem 4%;
+            background: rgba(0,0,0,0.05);
+            backdrop-filter: blur(8px);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
 
-    /* Grid principal: duas colunas em telas maiores */
-    .content-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      padding: 2.5rem 2.5rem 3rem;
-      align-items: center;
-    }
+        .brand-area {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
 
-    /* Coluna da esquerda: texto e identidade */
-    .text-column {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
+        .logo-placeholder {
+            width: 60px;
+            height: 60px;
+            background: #1e1e1e;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFC107;
+            font-weight: 700;
+            font-size: 1.2rem;
+            border: 2px dashed #F57C00;
+            transition: 0.2s;
+        }
 
-    /* Área da logo + nome (placeholder) */
-    .brand-placeholder {
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
-      flex-wrap: wrap;
-    }
+        .brand-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #1e1e1e;
+            background: rgba(255,255,255,0.25);
+            padding: 0.3rem 1.2rem;
+            border-radius: 12px;
+            border: 2px dashed #1e1e1e;
+            text-transform: uppercase;
+        }
 
-    .logo-space {
-      width: 70px;
-      height: 70px;
-      background: #1E1E1E; /* preto 10% */
-      border-radius: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #FFC107;
-      font-size: 2rem;
-      font-weight: bold;
-      border: 2px dashed #F57C00; /* laranja para destaque */
-      transition: all 0.3s ease;
-    }
+        /* ---------- Hero com imagem de fundo ---------- */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            min-height: 85vh;
+            background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center 30%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
 
-    .logo-space span {
-      opacity: 0.8;
-      font-size: 0.9rem;
-      text-align: center;
-      line-height: 1.2;
-      color: #FFC107;
-    }
+        /* Overlay amarelo semi-transparente (60% da sensação amarela) */
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,193,7,0.85) 0%, rgba(245,124,0,0.7) 100%);
+            z-index: 1;
+        }
 
-    .brand-name-space {
-      background: transparent;
-      border: 2px dashed #1E1E1E;
-      border-radius: 12px;
-      padding: 0.7rem 1.8rem;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #1E1E1E;
-      letter-spacing: -0.5px;
-      background: rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(2px);
-      transition: 0.2s;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            width: 90%;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
 
-    .brand-name-space:hover {
-      background: rgba(255, 255, 255, 0.5);
-      border-color: #F57C00;
-    }
+        .hero-badge {
+            display: inline-block;
+            background: #F57C00;
+            color: white;
+            padding: 0.4rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            backdrop-filter: blur(4px);
+        }
 
-    /* Título principal */
-    .main-headline {
-      font-size: clamp(2.2rem, 5vw, 3.4rem);
-      font-weight: 800;
-      line-height: 1.1;
-      color: #1E1E1E;
-      letter-spacing: -1px;
-    }
+        .hero-title {
+            font-size: clamp(2.8rem, 7vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            color: #1e1e1e;
+            text-shadow: 2px 2px 10px rgba(255,255,255,0.3);
+            margin-bottom: 1.2rem;
+        }
 
-    .highlight-orange {
-      color: #F57C00; /* laranja 30% para destaque */
-      position: relative;
-      display: inline-block;
-    }
+        .hero-title span {
+            color: #ffffff;
+            background: #F57C00;
+            padding: 0 0.3rem;
+            display: inline-block;
+            transform: rotate(-1deg);
+        }
 
-    .highlight-orange::after {
-      content: '';
-      position: absolute;
-      bottom: 4px;
-      left: 0;
-      width: 100%;
-      height: 10px;
-      background: rgba(245, 124, 0, 0.25);
-      z-index: -1;
-    }
+        .hero-description {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: #1e1e1e;
+            font-weight: 500;
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(5px);
+            padding: 1.2rem 2rem;
+            border-radius: 20px;
+            border-left: 5px solid #F57C00;
+        }
 
-    /* Parágrafo sobre a academia */
-    .about-text {
-      font-size: 1.15rem;
-      color: #1E1E1E;
-      max-width: 90%;
-      margin: 0.5rem 0 1rem;
-      font-weight: 400;
-      border-left: 4px solid #F57C00;
-      padding-left: 1.4rem;
-      background: linear-gradient(to right, rgba(255,255,255,0.2), transparent);
-    }
+        /* Botões de ação com links para as páginas solicitadas */
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
 
-    /* Botões com proporção laranja */
-    .cta-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 0.5rem;
-    }
+        .btn {
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
 
-    .btn-primary {
-      background: #F57C00; /* laranja 30% */
-      color: white;
-      border: none;
-      padding: 0.9rem 2.2rem;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 1rem;
-      letter-spacing: 0.5px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      box-shadow: 0 8px 18px rgba(245, 124, 0, 0.35);
-      border: 2px solid #F57C00;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
+        .btn-create {
+            background: #F57C00; /* laranja 30% */
+            color: white;
+            box-shadow: 0 10px 25px rgba(245,124,0,0.5);
+        }
 
-    .btn-primary:hover {
-      background: #E06B00;
-      border-color: #E06B00;
-      transform: translateY(-2px);
-      box-shadow: 0 12px 22px rgba(245, 124, 0, 0.45);
-    }
+        .btn-create:hover {
+            background: #d96c00;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(245,124,0,0.6);
+        }
 
-    .btn-outline {
-      background: transparent;
-      color: #1E1E1E;
-      border: 2px solid #1E1E1E;
-      padding: 0.9rem 2rem;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: 0.25s;
-      text-transform: uppercase;
-      backdrop-filter: blur(4px);
-    }
+        .btn-login {
+            background: #1e1e1e; /* preto 10% */
+            color: #FFC107;
+            border-color: #1e1e1e;
+        }
 
-    .btn-outline:hover {
-      background: #1E1E1E;
-      color: #FFC107;
-      border-color: #1E1E1E;
-    }
+        .btn-login:hover {
+            background: #2c2c2c;
+            color: white;
+            border-color: #F57C00;
+        }
 
-    /* Coluna da direita: ilustração / imagem de academia */
-    .visual-column {
-      background: #F57C00; /* laranja 30% como bloco de destaque */
-      border-radius: 2rem;
-      padding: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
-      aspect-ratio: 1 / 1;
-      max-height: 450px;
-      position: relative;
-      overflow: hidden;
-    }
+        .btn-manager {
+            background: transparent;
+            color: #1e1e1e;
+            border: 2px solid #1e1e1e;
+            backdrop-filter: blur(4px);
+            font-weight: 700;
+        }
 
-    /* Placeholder de imagem/imagem ilustrativa (substituível por foto real) */
-    .gym-illustration {
-      width: 100%;
-      height: 100%;
-      background: #1E1E1E; /* preto 10% para contraste interno */
-      border-radius: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #FFC107;
-      text-align: center;
-      font-weight: 600;
-      gap: 0.8rem;
-      background-image: radial-gradient(circle at 20% 30%, #3a3a3a 1px, transparent 1px);
-      background-size: 30px 30px;
-      border: 2px dashed #F57C00;
-    }
+        .btn-manager:hover {
+            background: #1e1e1e;
+            color: #FFC107;
+            border-color: #1e1e1e;
+        }
 
-    .gym-illustration i {
-      font-size: 3.5rem;
-      color: #F57C00;
-      opacity: 0.9;
-    }
+        /* ---------- Seção de informações (elogiando a academia) ---------- */
+        .info-section {
+            background: #FFC107; /* amarelo 60% */
+            padding: 4rem 4% 3rem;
+            position: relative;
+        }
 
-    .gym-illustration p {
-      font-size: 0.9rem;
-      color: #ccc;
-      max-width: 180px;
-    }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1e1e1e;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
 
-    /* Elementos decorativos para reforçar proporção de cores */
-    .decor-circle {
-      position: absolute;
-      border-radius: 50%;
-      background: #FFC107;
-      opacity: 0.5;
-      z-index: 0;
-    }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 5px;
+            background: #F57C00;
+            margin: 0.8rem auto 0;
+            border-radius: 5px;
+        }
 
-    .circle-small {
-      width: 80px;
-      height: 80px;
-      top: -20px;
-      right: -20px;
-      background: #FFC107;
-    }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
 
-    .circle-large {
-      width: 130px;
-      height: 130px;
-      bottom: -30px;
-      left: -30px;
-      background: #FFC107;
-      opacity: 0.4;
-    }
+        .feature-card {
+            background: rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(245,124,0,0.2);
+            transition: 0.3s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
 
-    /* Responsivo */
-    @media (max-width: 768px) {
-      .content-grid {
-        grid-template-columns: 1fr;
-        padding: 2rem 1.5rem;
-        gap: 2rem;
-      }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255,255,255,0.5);
+            border-color: #F57C00;
+        }
 
-      .visual-column {
-        max-height: 320px;
-        order: -1; /* imagem acima em mobile */
-      }
+        .feature-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: #F57C00;
+        }
 
-      .about-text {
-        max-width: 100%;
-      }
+        .feature-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1e1e1e;
+            margin-bottom: 0.8rem;
+        }
 
-      .brand-name-space {
-        font-size: 1.4rem;
-        padding: 0.5rem 1.2rem;
-      }
-    }
+        .feature-card p {
+            color: #2c2c2c;
+            font-weight: 500;
+            line-height: 1.5;
+        }
 
-    /* Pequeno footer discreto */
-    .footer-note {
-      text-align: center;
-      padding: 0.8rem;
-      font-size: 0.8rem;
-      color: #1E1E1E;
-      background: rgba(0,0,0,0.05);
-      border-top: 1px solid rgba(245, 124, 0, 0.3);
-    }
-  </style>
+        /* Depoimento rápido (elogiando) */
+        .testimonial-strip {
+            background: #1e1e1e; /* preto 10% */
+            color: #FFC107;
+            padding: 1.8rem 4%;
+            text-align: center;
+            font-style: italic;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-top: 2rem;
+            border-top: 4px solid #F57C00;
+            border-bottom: 4px solid #F57C00;
+        }
+
+        .testimonial-strip span {
+            font-weight: 800;
+            color: white;
+        }
+
+        /* Footer simples */
+        .footer-mini {
+            text-align: center;
+            padding: 1.2rem;
+            background: #0f0f0f;
+            color: #ccc;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 650px) {
+            .hero-description {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+            .brand-name {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="welcome-screen">
-    <div class="top-accent"></div>
-    
-    <div class="content-grid">
-      <!-- Coluna de texto e identidade -->
-      <div class="text-column">
-        <!-- Logo e Nome (placeholders) -->
-        <div class="brand-placeholder">
-          <div class="logo-space" title="Espaço para logo da academia">
-            <span>LOGO</span>
-          </div>
-          <div class="brand-name-space" title="Nome da empresa">
-            SUA MARCA
-          </div>
-        </div>
+    <div class="page-wrapper">
+        <!-- Cabeçalho com logo e nome (placeholders) -->
+        <header class="top-header">
+            <div class="brand-area">
+                <div class="logo-placeholder" title="Espaço para logo">🏋️</div>
+                <div class="brand-name" title="Nome da academia">NOME DA ACADEMIA</div>
+            </div>
+            <!-- pequeno espaço extra para manter simetria -->
+            <div style="width:60px;"></div>
+        </header>
 
-        <!-- Headline de boas-vindas -->
-        <h1 class="main-headline">
-          Transforme seu<br>
-          <span class="highlight-orange">potencial</span> em<br>
-          resultados reais.
-        </h1>
+        <!-- Hero com imagem de fundo e overlay amarelo -->
+        <section class="hero-section">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="hero-badge">🔥 RESULTADOS QUE INSPIRAM</div>
+                <h1 class="hero-title">
+                    Seu corpo, <span>sua evolução</span>,<br>nosso propósito.
+                </h1>
+                <p class="hero-description">
+                    Estrutura completa com equipamentos de última geração, 
+                    profissionais certificados e um ambiente pensado para 
+                    todos os níveis. Aqui o foco é você – do primeiro passo 
+                    até a superação diária.
+                </p>
+                <!-- Botões conforme solicitado -->
+                <div class="hero-buttons">
+                    <a href="10.html" class="btn btn-create">✨ Criar Conta</a>
+                    <a href="100.html" class="btn btn-login">🔐 Entrar na Conta</a>
+                    <a href="1000.html" class="btn btn-manager">⚙️ Gestor</a>
+                </div>
+            </div>
+        </section>
 
-        <!-- Texto sobre a academia -->
-        <div class="about-text">
-          <p>
-            Somos mais que uma academia: um espaço pensado para unir saúde, 
-            performance e bem-estar. Equipamentos de ponta, treinos personalizados 
-            e uma equipe dedicada a acompanhar cada passo da sua evolução. 
-            Do iniciante ao atleta, aqui o seu limite é apenas o ponto de partida.
-          </p>
-        </div>
+        <!-- Mais informações elogiando a academia -->
+        <section class="info-section">
+            <h2 class="section-title">Por que treinar conosco?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🏋️‍♂️</div>
+                    <h3>Equipamentos Premium</h3>
+                    <p>Máquinas modernas e pesos livres organizados para um treino seguro e eficiente.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Treinos Personalizados</h3>
+                    <p>Planos adaptados ao seu objetivo, com acompanhamento profissional contínuo.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🕒</div>
+                    <h3>Horários Flexíveis</h3>
+                    <p>Funcionamos de segunda a sábado, com ampla grade para se encaixar na sua rotina.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧘</div>
+                    <h3>Bem-estar Total</h3>
+                    <p>Área de alongamento, espaço para funcional e aulas coletivas energizantes.</p>
+                </div>
+            </div>
 
-        <!-- Chamadas para ação -->
-        <div class="cta-group">
-          <button class="btn-primary">
-            ▶ Agende uma aula grátis
-          </button>
-          <button class="btn-outline">
-            Conheça nossos planos
-          </button>
-        </div>
-      </div>
+            <!-- Depoimento rápido (mais elogios) -->
+            <div class="testimonial-strip">
+                “Estrutura impecável, equipe atenciosa e resultados que aparecem. 
+                <span>A melhor academia da região!</span>” – Membro desde 2023
+            </div>
+        </section>
 
-      <!-- Coluna visual (imagem/ilustração placeholder) -->
-      <div class="visual-column">
-        <div class="decor-circle circle-small"></div>
-        <div class="decor-circle circle-large"></div>
-        <div class="gym-illustration">
-          <!-- Ícone Unicode representando fitness (substitua por imagem real) -->
-          <span style="font-size: 4rem;">🏋️‍♂️</span>
-          <p style="color: #FFC107; font-weight: bold;">IMAGEM<br>DA ACADEMIA</p>
-          <p style="font-size: 0.75rem; opacity:0.7;">(foto real aqui)</p>
-        </div>
-      </div>
+        <!-- Rodapé discreto -->
+        <footer class="footer-mini">
+            © <span id="year"></span> [Nome da Academia] · Todos os direitos reservados.
+        </footer>
     </div>
 
-    <div class="footer-note">
-      © <span id="current-year"></span> • [Nome da Academia] • Todos os direitos reservados.
-    </div>
-  </div>
-
-  <script>
-    // Ano dinâmico no footer
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-  </script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
