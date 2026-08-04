@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Criar Conta | Academia</title>
-
+    <!-- 
+        Paleta: Amarelo 60% · Laranja 30% · Preto 10%
+        Imagem de fundo diferente da home
+    -->
     <style>
         :root {
             --yellow: #FFC107;
@@ -267,6 +270,7 @@
             gap: 0.5rem;
             width: 100%;
             margin-top: 0.8rem;
+            text-decoration: none;
         }
 
         .btn-submit:hover {
@@ -334,7 +338,7 @@
             <p class="subtitle">Preencha os dados e comece sua jornada hoje mesmo</p>
         </div>
 
-        <form class="form-grid" action="#" method="post">
+        <form class="form-grid" action="11.html" method="get">
             <!-- DADOS PESSOAIS -->
             <div class="input-group">
                 <label><span class="emoji">👤</span> Nome completo</label>
@@ -399,11 +403,11 @@
                 </select>
             </div>
 
-            <!-- BOTÃO -->
+            <!-- BOTÃO (agora aponta para 11.html) -->
             <div class="span-2">
-                <button type="submit" class="btn-submit">
+                <a href="11.html" class="btn-submit">
                     ✅ Finalizar Cadastro
-                </button>
+                </a>
             </div>
         </form>
 
