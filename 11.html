@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Painel | Academia</title>
+    <!-- 
+        Paleta: Amarelo 60% · Laranja 30% · Preto 10%
+        Dashboard principal pós-login
+    -->
+    <style>
+        :root {
+            --yellow: #FFC107;
+            --yellow-light: #FFD54F;
+            --orange: #F57C00;
+            --orange-dark: #E06B00;
+            --black: #1E1E1E;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.3);
+            --glass-strong: rgba(255, 255, 255, 0.5);
+            --glass-border: rgba(245, 124, 0, 0.3);
+            --shadow: 0 10px 25px rgba(0,0,0,0.1);
+            --shadow-orange: 0 10px 25px rgba(245,124,0,0.3);
+            --transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #FFC107; /* fallback */
+            color: var(--black);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Fundo com imagem desfocada e overlay */
+        .bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            background: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            filter: brightness(0.9);
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,193,7,0.5) 0%, rgba(245,124,0,0.35) 100%);
+            backdrop-filter: blur(4px);
+            z-index: -1;
+        }
+
+        /* Container geral */
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--glass);
+            backdrop-filter: blur(18px);
+            border-radius: 2.5rem;
+            padding: 0.8rem 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--glass-border);
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .logo-small {
+            width: 45px;
+            height: 45px;
+            background: var(--black);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--yellow);
+            border: 2px dashed var(--orange);
+        }
+        .brand-name {
+            font-weight: 800;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            background: rgba(255,255,255,0.5);
+            padding: 0.3rem 1rem;
+            border-radius: 12px;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+        .greeting {
+            font-weight: 700;
+            color: var(--black);
+            font-size: 1rem;
+            background: rgba(255,255,255,0.5);
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+        }
+        .avatar {
+            width: 45px;
+            height: 45px;
+            background: var(--orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border: 2px solid white;
+        }
+
+        /* Grid principal */
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Cards genéricos */
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            animation: fadeIn 0.6s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+            border-color: var(--orange);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+            color: var(--black);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* Card de boas-vindas (ocupa 2 colunas) */
+        .welcome-card {
+            grid-column: span 2;
+            background: linear-gradient(135deg, rgba(245,124,0,0.8), rgba(255,193,7,0.7));
+            color: white;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .welcome-card h2 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 0.3rem;
+        }
+        .welcome-card p {
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        /* Cards de atalho (1 coluna cada) */
+        .shortcut-card {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        .shortcut-icon {
+            font-size: 2.5rem;
+            background: var(--orange);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-bottom: 0.3rem;
+        }
+
+        /* Estatísticas rápidas */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: var(--glass-strong);
+            backdrop-filter: blur(15px);
+            border-radius: 1.8rem;
+            padding: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border: 1px solid var(--glass-border);
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--orange);
+        }
+        .stat-label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: #333;
+        }
+
+        /* Aulas do dia */
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .class-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border-radius: 1.8rem;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            border-left: 5px solid var(--orange);
+            transition: var(--transition);
+        }
+        .class-time {
+            font-weight: 800;
+            color: var(--orange);
+        }
+        .class-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .class-instructor {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        /* Gráfico de progresso (CSS puro) */
+        .progress-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .progress-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            border: 1px solid var(--glass-border);
+        }
+        .bar-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .bar-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .bar-label {
+            width: 80px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .bar-bg {
+            flex: 1;
+            height: 14px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .bar-fill {
+            height: 100%;
+            background: var(--orange);
+            border-radius: 20px;
+            width: 0%;
+            transition: width 1.5s ease;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--black);
+            font-weight: 500;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 900px) {
+            .main-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .welcome-card {
+                grid-column: span 2;
+            }
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .schedule-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .progress-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .main-grid, .stats-row, .schedule-grid {
+                grid-template-columns: 1fr;
+            }
+            .welcome-card {
+                grid-column: span 1;
+            }
+            .top-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-image"></div>
+    <div class="overlay"></div>
+
+    <div class="dashboard">
+        <!-- Header -->
+        <header class="top-bar">
+            <div class="brand">
+                <div class="logo-small" title="Logo">🏋️</div>
+                <div class="brand-name">NOME DA ACADEMIA</div>
+            </div>
+            <div class="user-menu">
+                <span class="greeting">👋 Olá, <strong>Aluno</strong></span>
+                <div class="avatar" title="Perfil">A</div>
+            </div>
+        </header>
+
+        <!-- Grid principal: boas-vindas + atalhos -->
+        <div class="main-grid">
+            <div class="card welcome-card">
+                <h2>Bem-vindo de volta!</h2>
+                <p>Pronto para mais um dia de superação? Sua evolução está logo abaixo.</p>
+            </div>
+            <div class="card shortcut-card">
+                <div class="shortcut-icon">📋</div>
+                <strong>Meus Treinos</strong>
+                <small>Ver plano atual</small>
+            </div>
+            <div class="card shortcut-card">
+                <div class="shortcut-icon">📅</div>
+                <strong>Agenda</strong>
+                <small>Aulas da semana</small>
+            </div>
+            <div class="card shortcut-card">
+                <div class="shortcut-icon">📊</div>
+                <strong>Progresso</strong>
+                <small>Evolução corporal</small>
+            </div>
+            <div class="card shortcut-card">
+                <div class="shortcut-icon">⚙️</div>
+                <strong>Configurações</strong>
+                <small>Perfil e plano</small>
+            </div>
+        </div>
+
+        <!-- Estatísticas rápidas -->
+        <div class="stats-row">
+            <div class="stat-card">
+                <div>🔥</div>
+                <div>
+                    <div class="stat-value">850</div>
+                    <div class="stat-label">Calorias hoje</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div>💪</div>
+                <div>
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">Treinos esta semana</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div>⏱️</div>
+                <div>
+                    <div class="stat-value">42min</div>
+                    <div class="stat-label">Média por sessão</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div>🏅</div>
+                <div>
+                    <div class="stat-value">Plano VIP</div>
+                    <div class="stat-label">Seu plano ativo</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Aulas do dia -->
+        <div class="schedule-grid">
+            <div class="class-card">
+                <span class="class-time">06:00 - 07:00</span>
+                <span class="class-name">Spinning Intenso</span>
+                <span class="class-instructor">Prof. Ricardo</span>
+            </div>
+            <div class="class-card">
+                <span class="class-time">08:00 - 09:00</span>
+                <span class="class-name">Funcional</span>
+                <span class="class-instructor">Profª. Amanda</span>
+            </div>
+            <div class="class-card">
+                <span class="class-time">18:00 - 19:00</span>
+                <span class="class-name">Musculação orientada</span>
+                <span class="class-instructor">Prof. Carlos</span>
+            </div>
+        </div>
+
+        <!-- Progresso (barras e gráfico simples) -->
+        <div class="progress-section">
+            <div class="progress-card">
+                <div class="card-title">📈 Progresso Mensal</div>
+                <div class="bar-container">
+                    <div class="bar-item">
+                        <span class="bar-label">Força</span>
+                        <div class="bar-bg"><div class="bar-fill" data-width="75"></div></div>
+                        <span>75%</span>
+                    </div>
+                    <div class="bar-item">
+                        <span class="bar-label">Cardio</span>
+                        <div class="bar-bg"><div class="bar-fill" data-width="60"></div></div>
+                        <span>60%</span>
+                    </div>
+                    <div class="bar-item">
+                        <span class="bar-label">Flexibilidade</span>
+                        <div class="bar-bg"><div class="bar-fill" data-width="45"></div></div>
+                        <span>45%</span>
+                    </div>
+                    <div class="bar-item">
+                        <span class="bar-label">Resistência</span>
+                        <div class="bar-bg"><div class="bar-fill" data-width="80"></div></div>
+                        <span>80%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="progress-card">
+                <div class="card-title">🎯 Metas da Semana</div>
+                <div style="margin-top:1rem; display:flex; flex-direction:column; gap:1rem;">
+                    <div>✅ 4 de 5 treinos concluídos</div>
+                    <div>✅ Beber 2L de água/dia</div>
+                    <div>⏳ Atingir novo recorde no supino</div>
+                    <div>⏳ Alongamento diário</div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            © 2025 [Nome da Academia] · Todos os direitos reservados.
+        </footer>
+    </div>
+
+    <script>
+        // Animar barras de progresso ao entrar na tela
+        document.addEventListener('DOMContentLoaded', () => {
+            const bars = document.querySelectorAll('.bar-fill');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const bar = entry.target;
+                        bar.style.width = bar.getAttribute('data-width') + '%';
+                    }
+                });
+            }, { threshold: 0.3 });
+            bars.forEach(bar => observer.observe(bar));
+        });
+    </script>
+</body>
+</html>
