@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Cadastro | Academia</title>
+    <style>
+        :root {
+            --yellow: #FFC107;
+            --yellow-light: #FFD54F;
+            --orange: #F57C00;
+            --orange-dark: #E06B00;
+            --black: #1E1E1E;
+            --white: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.3);
+            --glass-border: rgba(245, 124, 0, 0.3);
+            --shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            --transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
+            color: var(--black);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        /* Container principal */
+        .register-container {
+            width: 100%;
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 2.5rem;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(245, 124, 0, 0.2);
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header do formulário */
+        .form-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .brand-inline {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .logo-small {
+            width: 50px;
+            height: 50px;
+            background: var(--black);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border: 2px dashed var(--orange);
+        }
+
+        .brand-name-small {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--black);
+            background: rgba(255,255,255,0.4);
+            padding: 0.3rem 1.2rem;
+            border-radius: 12px;
+            border: 2px dashed var(--black);
+            text-transform: uppercase;
+            backdrop-filter: blur(4px);
+        }
+
+        .form-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--black);
+            letter-spacing: -0.5px;
+        }
+
+        .form-subtitle {
+            color: #2c2c2c;
+            font-weight: 500;
+            margin-top: 0.3rem;
+            font-size: 1rem;
+        }
+
+        /* Grid do formulário */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        /* Grupos de campos */
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        label {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--black);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        label i {
+            font-style: normal;
+            font-size: 1.1rem;
+        }
+
+        input, select, textarea {
+            padding: 0.9rem 1.2rem;
+            border-radius: 16px;
+            border: 2px solid rgba(30, 30, 30, 0.2);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+            outline: none;
+            color: var(--black);
+            font-weight: 500;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--orange);
+            box-shadow: 0 0 0 4px rgba(245, 124, 0, 0.15);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        /* Checkboxes personalizados */
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.3rem;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.5);
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .checkbox-option:hover {
+            background: rgba(255,255,255,0.8);
+            border-color: var(--orange);
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            accent-color: var(--orange);
+            width: 18px;
+            height: 18px;
+            margin: 0;
+        }
+
+        /* Plano (select) */
+        select {
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23F57C00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 1.2rem center;
+            background-size: 1.2rem;
+        }
+
+        /* Botão de envio */
+        .btn-submit {
+            background: var(--orange);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 10px 25px rgba(245, 124, 0, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+
+        .btn-submit:hover {
+            background: var(--orange-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 18px 35px rgba(245, 124, 0, 0.6);
+        }
+
+        /* Link voltar */
+        .back-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            text-align: center;
+            color: var(--black);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .back-link:hover {
+            color: var(--orange-dark);
+        }
+
+        /* Responsivo */
+        @media (max-width: 650px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .full-width {
+                grid-column: span 1;
+            }
+            .register-container {
+                padding: 1.8rem 1.2rem;
+            }
+            .checkbox-group {
+                flex-direction: column;
+                gap: 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <!-- Cabeçalho interno -->
+        <div class="form-header">
+            <div class="brand-inline">
+                <div class="logo-small" title="Logo">🏋️</div>
+                <div class="brand-name-small">NOME DA ACADEMIA</div>
+            </div>
+            <h1 class="form-title">Criar sua conta</h1>
+            <p class="form-subtitle">Preencha os dados para começar sua transformação</p>
+        </div>
+
+        <!-- Formulário -->
+        <form action="#" method="post" class="form-grid">
+            <!-- DADOS PESSOAIS -->
+            <div class="field-group">
+                <label><i>👤</i> Nome completo</label>
+                <input type="text" name="nome" placeholder="Seu nome completo" required>
+            </div>
+
+            <div class="field-group">
+                <label><i>📧</i> E-mail (Gmail)</label>
+                <input type="email" name="email" placeholder="exemplo@gmail.com" required>
+            </div>
+
+            <div class="field-group">
+                <label><i>📞</i> Telefone</label>
+                <input type="tel" name="telefone" placeholder="(11) 99999-9999" required>
+            </div>
+
+            <div class="field-group">
+                <label><i>🎂</i> Data de nascimento</label>
+                <input type="date" name="nascimento" required>
+            </div>
+
+            <!-- INFORMAÇÕES DE SAÚDE (full width) -->
+            <div class="field-group full-width">
+                <label><i>❤️</i> Informações de saúde</label>
+                <textarea name="saude" placeholder="Descreva condições médicas, lesões, alergias ou outras observações relevantes..."></textarea>
+            </div>
+
+            <!-- EXERCÍCIOS PREFERIDOS -->
+            <div class="field-group full-width">
+                <label><i>🏆</i> Exercícios de preferência</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="exercicios" value="musculacao"> Musculação
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="exercicios" value="cardio"> Cardio
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="exercicios" value="funcional"> Funcional
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="exercicios" value="yoga"> Yoga / Pilates
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="exercicios" value="lutas"> Lutas
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="exercicios" value="natacao"> Natação
+                    </label>
+                </div>
+            </div>
+
+            <!-- PLANO -->
+            <div class="field-group full-width">
+                <label><i>💳</i> Plano escolhido</label>
+                <select name="plano" required>
+                    <option value="" disabled selected>Selecione seu plano</option>
+                    <option value="basico">Plano Básico – Acesso livre</option>
+                    <option value="premium">Plano Premium – + aulas exclusivas</option>
+                    <option value="vip">Plano VIP – Personal trainer incluso</option>
+                    <option value="teste">Plano Experimental (7 dias grátis)</option>
+                </select>
+            </div>
+
+            <!-- Botão de envio -->
+            <div class="full-width">
+                <button type="submit" class="btn-submit">
+                    ✅ Finalizar Cadastro
+                </button>
+            </div>
+        </form>
+
+        <!-- Link para voltar -->
+        <div style="text-align: center;">
+            <a href="index.html" class="back-link">← Voltar para a página inicial</a>
+        </div>
+    </div>
+</body>
+</html>
