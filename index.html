@@ -3,26 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Academia Elite | Boas-vindas</title>
+    <title>Academia | Boas-vindas</title>
     <!-- 
-        PALETA (proporção):
-        - Amarelo 60% (fundos, hero, seções)
+        Paleta de cores (proporção visual):
+        - Amarelo 60% (overlay, fundos, detalhes amplos)
         - Laranja 30% (botões, ícones, destaques)
-        - Preto  10% (textos, rodapé, detalhes)
+        - Preto 10%  (textos, bordas, elementos de contraste)
     -->
     <style>
         :root {
             --yellow: #FFC107;
-            --yellow-dark: #FFB300;
             --orange: #F57C00;
-            --orange-glow: #FF8F00;
-            --black: #121212;
-            --black-soft: #1E1E1E;
+            --black: #1E1E1E;
             --white: #ffffff;
-            --glass-bg: rgba(255, 255, 255, 0.15);
-            --glass-border: rgba(255, 255, 255, 0.25);
-            --shadow-orange: 0 10px 30px rgba(245, 124, 0, 0.4);
-            --transition: 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+            --shadow-orange: 0 12px 30px rgba(245, 124, 0, 0.35);
+            --transition: 0.35s cubic-bezier(0.25, 0.8, 0.25, 1.2);
         }
 
         * {
@@ -31,50 +26,54 @@
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
             font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: var(--yellow);
-            color: var(--black);
+            background: #0f0f0f;
+            color: #1e1e1e;
             line-height: 1.6;
+            min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* ---------- HEADER FIXO ---------- */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(255, 193, 7, 0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(245, 124, 0, 0.3);
-            transition: var(--transition);
-            padding: 0.8rem 4%;
+        .page-wrapper {
+            background-color: var(--yellow);
+            position: relative;
+        }
+
+        /* ---------- Header ---------- */
+        .top-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 1.2rem 5%;
+            background: rgba(255, 193, 7, 0.75);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            flex-wrap: wrap;
+            gap: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: background 0.3s, box-shadow 0.3s;
+            border-bottom: 1px solid rgba(245, 124, 0, 0.2);
         }
 
-        .header.scrolled {
-            background: rgba(18, 18, 18, 0.9);
-            box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+        .top-header.scrolled {
+            background: rgba(30, 30, 30, 0.9);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
         }
-
-        .header.scrolled .brand-name {
+        .top-header.scrolled .brand-name {
             color: var(--yellow);
             border-color: var(--orange);
         }
+        .top-header.scrolled .logo-placeholder {
+            border-color: var(--yellow);
+        }
 
-        .brand {
+        .brand-area {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 1rem;
         }
 
         .logo-placeholder {
@@ -85,102 +84,100 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            color: var(--yellow);
+            font-weight: 700;
+            font-size: 1.3rem;
             border: 2px dashed var(--orange);
-            transition: var(--transition);
+            transition: 0.3s;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
         }
 
         .brand-name {
-            font-size: 1.6rem;
+            font-size: 1.7rem;
             font-weight: 800;
             letter-spacing: -0.5px;
             color: var(--black);
-            border: 2px dashed var(--black);
-            padding: 0.3rem 1.2rem;
-            border-radius: 14px;
             background: rgba(255,255,255,0.3);
-            backdrop-filter: blur(5px);
-            transition: var(--transition);
+            padding: 0.3rem 1.4rem;
+            border-radius: 12px;
+            border: 2px dashed var(--black);
             text-transform: uppercase;
+            backdrop-filter: blur(5px);
+            transition: 0.3s;
         }
 
-        .header-buttons {
+        .header-actions {
             display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
+            gap: 0.7rem;
         }
-
-        .btn-sm {
-            padding: 0.5rem 1.2rem;
-            border-radius: 50px;
+        .btn-header {
+            padding: 0.5rem 1.3rem;
+            border-radius: 40px;
             font-weight: 700;
             font-size: 0.85rem;
             text-decoration: none;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
             transition: var(--transition);
-            text-transform: uppercase;
-            cursor: pointer;
+            border: 2px solid transparent;
         }
-
-        .btn-sm-outline {
-            background: transparent;
-            border: 2px solid var(--black);
+        .btn-header-outline {
+            border-color: var(--black);
             color: var(--black);
+            background: transparent;
         }
-        .btn-sm-outline:hover {
+        .btn-header-outline:hover {
             background: var(--black);
             color: var(--yellow);
-            border-color: var(--black);
         }
-
-        .btn-sm-orange {
+        .btn-header-orange {
             background: var(--orange);
             color: white;
-            border: 2px solid var(--orange);
-            box-shadow: 0 4px 12px rgba(245,124,0,0.4);
+            border-color: var(--orange);
+            box-shadow: 0 4px 12px rgba(245,124,0,0.5);
         }
-        .btn-sm-orange:hover {
-            background: #e06b00;
+        .btn-header-orange:hover {
+            background: #d96c00;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(245,124,0,0.6);
+            box-shadow: 0 8px 18px rgba(245,124,0,0.6);
         }
 
-        /* ---------- HERO COM CANVAS DE PARTÍCULAS ---------- */
-        .hero {
+        /* ---------- Hero ---------- */
+        .hero-section {
             position: relative;
             width: 100%;
-            height: 100vh;
-            min-height: 650px;
+            min-height: 90vh;
+            background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center 30%;
+            background-attachment: fixed;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            background: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
-        }
-
-        .hero-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
+            color: white;
         }
 
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at 30% 40%, rgba(255,193,7,0.85) 0%, rgba(245,124,0,0.7) 90%);
-            z-index: 2;
+            background: linear-gradient(135deg, rgba(255,193,7,0.9) 0%, rgba(245,124,0,0.75) 100%);
+            z-index: 1;
         }
 
         .hero-content {
             position: relative;
-            z-index: 3;
+            z-index: 2;
+            max-width: 1000px;
+            width: 90%;
             text-align: center;
-            max-width: 950px;
-            padding: 2rem;
-            animation: fadeInUp 1.2s ease;
+            padding: 2rem 1rem;
+            animation: fadeInUp 1s ease;
         }
 
         @keyframes fadeInUp {
@@ -192,114 +189,142 @@
             display: inline-block;
             background: var(--orange);
             color: white;
-            padding: 0.4rem 2rem;
+            padding: 0.5rem 2rem;
             border-radius: 50px;
             font-weight: 700;
-            letter-spacing: 1px;
             font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            letter-spacing: 1.5px;
+            margin-bottom: 1.8rem;
+            text-transform: uppercase;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(245,124,0,0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(245,124,0,0); }
+            100% { box-shadow: 0 0 0 0 rgba(245,124,0,0); }
         }
 
         .hero-title {
-            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-size: clamp(2.8rem, 7vw, 4.8rem);
             font-weight: 900;
-            line-height: 1.05;
+            line-height: 1.1;
             color: var(--black);
-            text-shadow: 2px 2px 15px rgba(255,255,255,0.4);
-            margin-bottom: 1.2rem;
-            letter-spacing: -1px;
+            text-shadow: 2px 2px 15px rgba(255,255,255,0.3);
+            margin-bottom: 1.5rem;
         }
         .hero-title span {
-            background: var(--orange);
             color: white;
-            padding: 0 0.3rem;
+            background: var(--orange);
+            padding: 0.1rem 0.4rem;
             display: inline-block;
             transform: rotate(-1deg);
+            border-radius: 4px;
         }
 
-        .hero-sub {
-            font-size: 1.4rem;
+        .hero-description {
+            font-size: 1.25rem;
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+            color: var(--black);
             font-weight: 500;
-            color: var(--black-soft);
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            padding: 1rem 2rem;
-            border-radius: 40px;
-            display: inline-block;
-            margin-bottom: 2rem;
+            background: rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 2rem;
+            border-radius: 20px;
+            border-left: 5px solid var(--orange);
         }
 
-        .hero-actions {
+        .hero-buttons {
             display: flex;
-            gap: 1.2rem;
             flex-wrap: wrap;
+            gap: 1.2rem;
             justify-content: center;
         }
 
-        .btn-hero {
-            padding: 1rem 2.5rem;
+        .btn {
+            padding: 0.95rem 2.5rem;
             border-radius: 50px;
-            font-weight: 800;
+            font-weight: 700;
             font-size: 1rem;
             text-transform: uppercase;
             letter-spacing: 0.8px;
             text-decoration: none;
-            transition: var(--transition);
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            cursor: pointer;
             position: relative;
             overflow: hidden;
-            z-index: 1;
+        }
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.2);
+            transform: translateX(-100%);
+            transition: transform 0.4s;
+        }
+        .btn:hover::after {
+            transform: translateX(0);
         }
 
-        .btn-primary-hero {
+        .btn-create {
             background: var(--orange);
             color: white;
-            box-shadow: 0 12px 30px rgba(245,124,0,0.5);
+            box-shadow: var(--shadow-orange);
         }
-        .btn-primary-hero:hover {
+        .btn-create:hover {
             background: #e06b00;
             transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(245,124,0,0.7);
+            box-shadow: 0 18px 40px rgba(245,124,0,0.6);
         }
 
-        .btn-outline-hero {
-            background: transparent;
-            border: 2px solid var(--black);
-            color: var(--black);
-            backdrop-filter: blur(8px);
-        }
-        .btn-outline-hero:hover {
+        .btn-login {
             background: var(--black);
             color: var(--yellow);
             border-color: var(--black);
         }
-
-        /* ---------- SEÇÕES GERAIS ---------- */
-        .section {
-            padding: 5rem 4%;
-            position: relative;
-        }
-
-        .section-yellow {
-            background: var(--yellow);
-        }
-        .section-orange {
-            background: var(--orange);
+        .btn-login:hover {
+            background: #2c2c2c;
+            border-color: var(--orange);
             color: white;
+            transform: translateY(-4px);
         }
-        .section-black {
+
+        .btn-manager {
+            background: transparent;
+            color: var(--black);
+            border: 2px solid var(--black);
+            backdrop-filter: blur(6px);
+            font-weight: 700;
+        }
+        .btn-manager:hover {
             background: var(--black);
             color: var(--yellow);
+            border-color: var(--black);
+            transform: translateY(-4px);
+        }
+
+        /* ---------- Seção de informações ---------- */
+        .info-section {
+            background: var(--yellow);
+            padding: 5rem 5% 4rem;
+            position: relative;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.8rem;
+            font-size: 2.7rem;
             font-weight: 900;
+            color: var(--black);
             margin-bottom: 3rem;
             position: relative;
             letter-spacing: -0.5px;
@@ -307,191 +332,224 @@
         .section-title::after {
             content: '';
             display: block;
-            width: 70px;
+            width: 80px;
             height: 5px;
             background: var(--orange);
-            margin: 0.8rem auto 0;
+            margin: 1rem auto 0;
             border-radius: 5px;
         }
 
-        /* Cards de diferenciais */
-        .cards-grid {
+        .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2.5rem;
+            max-width: 1150px;
             margin: 0 auto;
         }
 
-        .card {
-            background: rgba(255,255,255,0.4);
+        .feature-card {
+            background: rgba(255,255,255,0.35);
             backdrop-filter: blur(15px);
             border-radius: 28px;
-            padding: 2.5rem 1.8rem;
+            padding: 2.5rem 1.5rem;
             text-align: center;
             border: 1px solid rgba(245,124,0,0.25);
             transition: var(--transition);
-            transform-style: preserve-3d;
-            perspective: 1000px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s;
         }
-        .card:hover {
-            transform: translateY(-12px) rotateX(3deg);
-            box-shadow: 0 25px 45px rgba(0,0,0,0.15);
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.6);
             border-color: var(--orange);
-            background: rgba(255,255,255,0.7);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
-        .card-icon {
-            font-size: 3.2rem;
-            margin-bottom: 1.2rem;
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--orange);
         }
-        .card h3 {
+        .feature-card h3 {
             font-size: 1.5rem;
             font-weight: 700;
+            color: var(--black);
             margin-bottom: 0.8rem;
         }
-
-        /* Depoimentos */
-        .testimonial-slider {
-            display: flex;
-            gap: 2rem;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            padding: 1rem 0;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        .testimonial {
-            min-width: 300px;
-            flex: 0 0 auto;
-            background: rgba(255,255,255,0.25);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 2rem;
-            scroll-snap-align: start;
-            border: 1px solid rgba(245,124,0,0.3);
+        .feature-card p {
+            color: #2c2c2c;
+            font-weight: 500;
         }
 
-        /* CTA final */
-        .cta-section {
-            background: var(--orange);
-            text-align: center;
-            padding: 5rem 4%;
-            border-top: 8px solid var(--black);
-        }
-
-        .footer {
+        /* Depoimento */
+        .testimonial-strip {
             background: var(--black);
-            color: #aaa;
+            color: var(--yellow);
+            padding: 2rem 5%;
             text-align: center;
-            padding: 2rem;
-            font-size: 0.9rem;
+            font-style: italic;
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-top: 3rem;
+            border-top: 4px solid var(--orange);
+            border-bottom: 4px solid var(--orange);
+            position: relative;
+        }
+        .testimonial-strip::before {
+            content: "“";
+            font-size: 5rem;
+            position: absolute;
+            left: 5%;
+            top: -20px;
+            color: var(--orange);
+            opacity: 0.6;
+        }
+        .testimonial-strip span {
+            font-weight: 800;
+            color: white;
         }
 
-        @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                gap: 0.8rem;
+        /* Contador de alunos (extra) */
+        .stats-section {
+            background: var(--orange);
+            padding: 3rem 5%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3rem;
+            color: white;
+            text-align: center;
+        }
+        .stat-item h3 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 0.3rem;
+        }
+        .stat-item p {
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .footer-mini {
+            text-align: center;
+            padding: 1.5rem;
+            background: #0f0f0f;
+            color: #ccc;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 650px) {
+            .hero-description {
+                font-size: 1rem;
                 padding: 1rem;
             }
-            .hero-title {
-                font-size: 2.5rem;
+            .brand-name {
+                font-size: 1.3rem;
+            }
+            .hero-section {
+                background-attachment: scroll;
             }
         }
     </style>
 </head>
 <body>
-    <!-- HEADER -->
-    <header class="header" id="header">
-        <div class="brand">
-            <div class="logo-placeholder" title="Logo da academia">🏋️</div>
-            <div class="brand-name">NOME DA ACADEMIA</div>
-        </div>
-        <div class="header-buttons">
-            <a href="10.html" class="btn-sm btn-sm-orange">Criar Conta</a>
-            <a href="100.html" class="btn-sm btn-sm-outline">Entrar</a>
-            <a href="1000.html" class="btn-sm btn-sm-outline">Gestor</a>
-        </div>
-    </header>
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header class="top-header" id="header">
+            <div class="brand-area">
+                <div class="logo-placeholder" title="Espaço para logo">🏋️</div>
+                <div class="brand-name" title="Nome da academia">NOME DA ACADEMIA</div>
+            </div>
+            <div class="header-actions">
+                <a href="10.html" class="btn-header btn-header-orange">Criar Conta</a>
+                <a href="100.html" class="btn-header btn-header-outline">Entrar</a>
+                <a href="1000.html" class="btn-header btn-header-outline">Gestor</a>
+            </div>
+        </header>
 
-    <!-- HERO COM PARTÍCULAS -->
-    <section class="hero" id="hero">
-        <canvas class="hero-canvas" id="particlesCanvas"></canvas>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <div class="hero-badge">⚡ RESULTADOS QUE FALAM POR SI</div>
-            <h1 class="hero-title">
-                TRANSFORME<br>SEU <span>MELHOR</span>
-            </h1>
-            <p class="hero-sub">
-                Estrutura premium · Profissionais dedicados · Comunidade que inspira
-            </p>
-            <div class="hero-actions">
-                <a href="10.html" class="btn-hero btn-primary-hero">✨ Criar Conta Grátis</a>
-                <a href="100.html" class="btn-hero btn-outline-hero">🔐 Já sou aluno</a>
+        <!-- Hero -->
+        <section class="hero-section">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="hero-badge">🔥 RESULTADOS QUE INSPIRAM</div>
+                <h1 class="hero-title">
+                    Seu corpo, <span>sua evolução</span>,<br>nosso propósito.
+                </h1>
+                <p class="hero-description">
+                    Estrutura completa com equipamentos de última geração, 
+                    profissionais certificados e um ambiente pensado para 
+                    todos os níveis. Aqui o foco é você – do primeiro passo 
+                    até a superação diária.
+                </p>
+                <div class="hero-buttons">
+                    <a href="10.html" class="btn btn-create">✨ Criar Conta</a>
+                    <a href="100.html" class="btn btn-login">🔐 Entrar na Conta</a>
+                    <a href="1000.html" class="btn btn-manager">⚙️ Gestor</a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- SOBRE / DIFERENCIAIS -->
-    <section class="section section-yellow">
-        <h2 class="section-title">Por que escolher a gente?</h2>
-        <div class="cards-grid">
-            <div class="card">
-                <div class="card-icon">🏋️‍♂️</div>
-                <h3>Equipamentos de Elite</h3>
-                <p>Máquinas importadas, pesos livres e área de cross training com o melhor do mercado.</p>
+        <!-- Diferenciais -->
+        <section class="info-section">
+            <h2 class="section-title">Por que treinar conosco?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🏋️‍♂️</div>
+                    <h3>Equipamentos Premium</h3>
+                    <p>Máquinas modernas e pesos livres organizados para um treino seguro e eficiente.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Treinos Personalizados</h3>
+                    <p>Planos adaptados ao seu objetivo, com acompanhamento profissional contínuo.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🕒</div>
+                    <h3>Horários Flexíveis</h3>
+                    <p>Funcionamos de segunda a sábado, com ampla grade para se encaixar na sua rotina.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧘</div>
+                    <h3>Bem-estar Total</h3>
+                    <p>Área de alongamento, espaço para funcional e aulas coletivas energizantes.</p>
+                </div>
             </div>
-            <div class="card">
-                <div class="card-icon">📋</div>
-                <h3>Treino Personalizado</h3>
-                <p>Planos ajustados ao seu biotipo e objetivo, com avaliação física completa inclusa.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">🧘</div>
-                <h3>Bem-estar Integrado</h3>
-                <p>Yoga, pilates e salas de alongamento para equilibrar corpo e mente.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">🕒</div>
-                <h3>Horário Flexível</h3>
-                <p>Funcionamos de segunda a sábado, 5h às 23h. Treine no seu ritmo.</p>
-            </div>
-        </div>
-    </section>
 
-    <!-- DEPOIMENTOS -->
-    <section class="section section-orange">
-        <h2 class="section-title" style="color:white;">O que dizem nossos alunos</h2>
-        <div class="testimonial-slider">
-            <div class="testimonial">
-                <p>"Estrutura impecável e professores que realmente acompanham. Minha evolução foi surreal!"</p>
-                <strong>— Mariana S.</strong>
+            <div class="testimonial-strip">
+                “Estrutura impecável, equipe atenciosa e resultados que aparecem. 
+                <span>A melhor academia da região!</span>” – Membro desde 2023
             </div>
-            <div class="testimonial">
-                <p>"Ambiente motivador, equipamentos novos e limpos. A melhor academia que já frequentei."</p>
-                <strong>— Pedro H.</strong>
-            </div>
-            <div class="testimonial">
-                <p>"Treino personalizado fez toda diferença. Resultados em 3 meses que não tive em anos."</p>
-                <strong>— Carla M.</strong>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- CTA FINAL -->
-    <section class="cta-section">
-        <h2 style="font-size:2.5rem; font-weight:900; color:white;">Pronto para sua melhor versão?</h2>
-        <p style="font-size:1.2rem; margin:1rem 0 2rem; color:white;">Cadastre-se agora e ganhe 1 dia de treino grátis.</p>
-        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-            <a href="10.html" class="btn-hero btn-primary-hero" style="background:var(--black); border-color:var(--black);">Criar Conta</a>
-            <a href="1000.html" class="btn-hero btn-outline-hero" style="border-color:white; color:white;">Acessar como Gestor</a>
-        </div>
-    </section>
+        <!-- Números (contador animado) -->
+        <section class="stats-section">
+            <div class="stat-item">
+                <h3><span class="counter" data-target="1250">0</span>+</h3>
+                <p>Alunos ativos</p>
+            </div>
+            <div class="stat-item">
+                <h3><span class="counter" data-target="45">0</span>+</h3>
+                <p>Aulas por semana</p>
+            </div>
+            <div class="stat-item">
+                <h3><span class="counter" data-target="98">0</span>%</h3>
+                <p>Satisfação</p>
+            </div>
+        </section>
 
-    <footer class="footer">
-        © <span id="year"></span> [Nome da Academia] · Todos os direitos reservados · 
-        <a href="100.html" style="color:var(--orange);">Entrar</a>
-    </footer>
+        <footer class="footer-mini">
+            © <span id="year"></span> [Nome da Academia] · Todos os direitos reservados.
+        </footer>
+    </div>
 
     <script>
         // Ano dinâmico
@@ -503,80 +561,52 @@
             header.classList.toggle('scrolled', window.scrollY > 50);
         });
 
-        // Partículas no canvas
-        (function() {
-            const canvas = document.getElementById('particlesCanvas');
-            const ctx = canvas.getContext('2d');
-            let width, height;
-            let particles = [];
-
-            function resize() {
-                width = canvas.width = canvas.offsetWidth;
-                height = canvas.height = canvas.offsetHeight;
-            }
-            window.addEventListener('resize', resize);
-            resize();
-
-            class Particle {
-                constructor() {
-                    this.reset();
+        // Animação de entrada dos cards (Intersection Observer)
+        const cards = document.querySelectorAll('.feature-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
                 }
-                reset() {
-                    this.x = Math.random() * width;
-                    this.y = Math.random() * height;
-                    this.size = Math.random() * 3 + 1.5;
-                    this.speedX = (Math.random() - 0.5) * 1.2;
-                    this.speedY = (Math.random() - 0.5) * 1.2;
-                    this.opacity = Math.random() * 0.6 + 0.2;
-                }
-                update() {
-                    this.x += this.speedX;
-                    this.y += this.speedY;
-                    if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
-                        this.reset();
+            });
+        }, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' });
+
+        cards.forEach(card => observer.observe(card));
+
+        // Contador animado
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200; // quanto menor, mais rápido
+
+        const animateCounter = () => {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const updateCount = () => {
+                    const current = +counter.innerText;
+                    const increment = target / speed;
+                    if (current < target) {
+                        counter.innerText = Math.ceil(current + increment);
+                        setTimeout(updateCount, 15);
+                    } else {
+                        counter.innerText = target;
                     }
-                }
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-                    ctx.fill();
-                    // brilho laranja em algumas
-                    if (Math.random() < 0.01) {
-                        ctx.fillStyle = `rgba(245, 124, 0, 0.8)`;
-                        ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI*2);
-                        ctx.fill();
-                    }
-                }
-            }
+                };
+                updateCount();
+            });
+        };
 
-            for (let i = 0; i < 80; i++) {
-                particles.push(new Particle());
-            }
-
-            function animate() {
-                ctx.clearRect(0, 0, width, height);
-                particles.forEach(p => { p.update(); p.draw(); });
-                // conectar partículas próximas
-                for (let i = 0; i < particles.length; i++) {
-                    for (let j = i + 1; j < particles.length; j++) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const dist = Math.sqrt(dx*dx + dy*dy);
-                        if (dist < 100) {
-                            ctx.beginPath();
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.strokeStyle = `rgba(255,255,255,${0.08 * (1 - dist/100)})`;
-                            ctx.lineWidth = 0.6;
-                            ctx.stroke();
-                        }
-                    }
+        // Iniciar contador quando a seção stats estiver visível
+        const statsSection = document.querySelector('.stats-section');
+        let counted = false;
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !counted) {
+                    animateCounter();
+                    counted = true;
                 }
-                requestAnimationFrame(animate);
-            }
-            animate();
-        })();
+            });
+        }, { threshold: 0.5 });
+
+        if (statsSection) statsObserver.observe(statsSection);
     </script>
 </body>
 </html>
