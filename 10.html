@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Cadastro | Academia</title>
+    <title>Criar Conta | Academia</title>
+    <!-- 
+        Paleta: Amarelo 60% · Laranja 30% · Preto 10%
+        Imagem de fundo diferente da home
+    -->
     <style>
         :root {
             --yellow: #FFC107;
@@ -12,9 +16,9 @@
             --orange-dark: #E06B00;
             --black: #1E1E1E;
             --white: #ffffff;
-            --glass-bg: rgba(255, 255, 255, 0.3);
-            --glass-border: rgba(245, 124, 0, 0.3);
-            --shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            --glass: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(245, 124, 0, 0.25);
+            --shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
             --transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1.2);
         }
 
@@ -26,100 +30,136 @@
 
         body {
             font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
+            background: var(--black); /* fallback */
             color: var(--black);
             line-height: 1.6;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1.5rem;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        /* Container principal */
-        .register-container {
+        /* Imagem de fundo (diferente da home) */
+        .bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 900px;
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 2.5rem;
-            padding: 2.5rem 2rem;
-            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.15);
-            border: 1px solid rgba(245, 124, 0, 0.2);
-            animation: fadeIn 0.8s ease;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            background: url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        /* Overlay com as cores da marca (mais transparente para ver a imagem) */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,193,7,0.45) 0%, rgba(245,124,0,0.35) 100%);
+            z-index: -1;
+            backdrop-filter: blur(2px);
+        }
+
+        /* Container principal do formulário */
+        .register-card {
+            width: 100%;
+            max-width: 800px;
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 3rem;
+            padding: 2.8rem 2.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--glass-border);
+            animation: slideUp 0.8s ease;
+            margin: 2rem 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Header do formulário */
+        /* Cabeçalho com logo e nome */
         .form-header {
             text-align: center;
             margin-bottom: 2.5rem;
         }
 
-        .brand-inline {
+        .brand-row {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 1rem;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
         }
 
-        .logo-small {
-            width: 50px;
-            height: 50px;
+        .logo-placeholder {
+            width: 55px;
+            height: 55px;
             background: var(--black);
-            border-radius: 14px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             border: 2px dashed var(--orange);
+            color: var(--yellow);
+            animation: float 3s ease-in-out infinite;
         }
 
-        .brand-name-small {
-            font-size: 1.5rem;
-            font-weight: 800;
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .brand-name {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
             color: var(--black);
             background: rgba(255,255,255,0.4);
-            padding: 0.3rem 1.2rem;
-            border-radius: 12px;
+            padding: 0.3rem 1.4rem;
+            border-radius: 14px;
             border: 2px dashed var(--black);
             text-transform: uppercase;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(8px);
         }
 
-        .form-title {
-            font-size: 2.2rem;
+        .title {
+            font-size: 2.3rem;
             font-weight: 900;
             color: var(--black);
+            line-height: 1.2;
             letter-spacing: -0.5px;
         }
 
-        .form-subtitle {
+        .subtitle {
             color: #2c2c2c;
             font-weight: 500;
-            margin-top: 0.3rem;
+            margin-top: 0.4rem;
             font-size: 1rem;
+            opacity: 0.85;
         }
 
         /* Grid do formulário */
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.8rem;
+            gap: 1.8rem 2rem;
         }
 
-        .full-width {
+        .span-2 {
             grid-column: span 2;
         }
 
-        /* Grupos de campos */
-        .field-group {
+        /* Grupos de campo */
+        .input-group {
             display: flex;
             flex-direction: column;
             gap: 0.4rem;
@@ -127,28 +167,27 @@
 
         label {
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
             color: var(--black);
             display: flex;
             align-items: center;
             gap: 0.4rem;
         }
 
-        label i {
-            font-style: normal;
+        label .emoji {
             font-size: 1.1rem;
         }
 
         input, select, textarea {
             padding: 0.9rem 1.2rem;
             border-radius: 16px;
-            border: 2px solid rgba(30, 30, 30, 0.2);
+            border: 2px solid rgba(30, 30, 30, 0.15);
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(8px);
             font-family: inherit;
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: var(--transition);
             outline: none;
             color: var(--black);
@@ -157,53 +196,55 @@
 
         input:focus, select:focus, textarea:focus {
             border-color: var(--orange);
-            box-shadow: 0 0 0 4px rgba(245, 124, 0, 0.15);
+            box-shadow: 0 0 0 4px rgba(245, 124, 0, 0.2);
             background: rgba(255, 255, 255, 0.9);
         }
 
         textarea {
             resize: vertical;
-            min-height: 90px;
+            min-height: 85px;
         }
 
-        /* Checkboxes personalizados */
+        /* Checkboxes estilizados */
         .checkbox-group {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 0.3rem;
+            gap: 0.8rem;
+            margin-top: 0.2rem;
         }
 
-        .checkbox-option {
+        .checkbox-pill {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            background: rgba(255,255,255,0.5);
-            padding: 0.6rem 1.2rem;
-            border-radius: 40px;
+            background: rgba(255,255,255,0.55);
+            backdrop-filter: blur(5px);
+            padding: 0.6rem 1.3rem;
+            border-radius: 50px;
             cursor: pointer;
             transition: var(--transition);
             border: 2px solid transparent;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            user-select: none;
         }
 
-        .checkbox-option:hover {
-            background: rgba(255,255,255,0.8);
+        .checkbox-pill:hover {
+            background: rgba(255,255,255,0.85);
             border-color: var(--orange);
         }
 
-        .checkbox-option input[type="checkbox"] {
+        .checkbox-pill input[type="checkbox"] {
             accent-color: var(--orange);
-            width: 18px;
-            height: 18px;
+            width: 17px;
+            height: 17px;
             margin: 0;
         }
 
-        /* Plano (select) */
+        /* Select personalizado */
         select {
             appearance: none;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23F57C00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>');
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="%23F57C00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>');
             background-repeat: no-repeat;
             background-position: right 1.2rem center;
             background-size: 1.2rem;
@@ -222,35 +263,40 @@
             letter-spacing: 0.8px;
             cursor: pointer;
             transition: var(--transition);
-            box-shadow: 0 10px 25px rgba(245, 124, 0, 0.45);
+            box-shadow: 0 10px 25px rgba(245, 124, 0, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
             width: 100%;
-            margin-top: 1.5rem;
+            margin-top: 0.8rem;
         }
 
         .btn-submit:hover {
             background: var(--orange-dark);
             transform: translateY(-3px);
-            box-shadow: 0 18px 35px rgba(245, 124, 0, 0.6);
+            box-shadow: 0 18px 35px rgba(245, 124, 0, 0.65);
         }
 
-        /* Link voltar */
+        /* Link de voltar */
         .back-link {
             display: inline-block;
-            margin-top: 1.5rem;
+            margin-top: 1.8rem;
             text-align: center;
             color: var(--black);
-            font-weight: 600;
+            font-weight: 700;
             text-decoration: none;
             transition: color 0.2s;
             font-size: 0.95rem;
+            backdrop-filter: blur(4px);
+            background: rgba(255,255,255,0.3);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
         }
 
         .back-link:hover {
             color: var(--orange-dark);
+            background: rgba(255,255,255,0.6);
         }
 
         /* Responsivo */
@@ -258,88 +304,95 @@
             .form-grid {
                 grid-template-columns: 1fr;
             }
-            .full-width {
+            .span-2 {
                 grid-column: span 1;
             }
-            .register-container {
-                padding: 1.8rem 1.2rem;
+            .register-card {
+                padding: 2rem 1.3rem;
+                border-radius: 2rem;
             }
             .checkbox-group {
                 flex-direction: column;
-                gap: 0.6rem;
+                gap: 0.5rem;
+            }
+            .brand-name {
+                font-size: 1.4rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="register-container">
-        <!-- Cabeçalho interno -->
+    <!-- Fundo com imagem diferente da home -->
+    <div class="bg-image"></div>
+    <div class="overlay"></div>
+
+    <!-- Cartão de cadastro -->
+    <div class="register-card">
         <div class="form-header">
-            <div class="brand-inline">
-                <div class="logo-small" title="Logo">🏋️</div>
-                <div class="brand-name-small">NOME DA ACADEMIA</div>
+            <div class="brand-row">
+                <div class="logo-placeholder" title="Logo da academia">🏋️</div>
+                <div class="brand-name">NOME DA ACADEMIA</div>
             </div>
-            <h1 class="form-title">Criar sua conta</h1>
-            <p class="form-subtitle">Preencha os dados para começar sua transformação</p>
+            <h1 class="title">Criar sua conta</h1>
+            <p class="subtitle">Preencha os dados e comece sua jornada hoje mesmo</p>
         </div>
 
-        <!-- Formulário -->
-        <form action="#" method="post" class="form-grid">
+        <form class="form-grid" action="#" method="post">
             <!-- DADOS PESSOAIS -->
-            <div class="field-group">
-                <label><i>👤</i> Nome completo</label>
+            <div class="input-group">
+                <label><span class="emoji">👤</span> Nome completo</label>
                 <input type="text" name="nome" placeholder="Seu nome completo" required>
             </div>
 
-            <div class="field-group">
-                <label><i>📧</i> E-mail (Gmail)</label>
+            <div class="input-group">
+                <label><span class="emoji">📧</span> E-mail (Gmail)</label>
                 <input type="email" name="email" placeholder="exemplo@gmail.com" required>
             </div>
 
-            <div class="field-group">
-                <label><i>📞</i> Telefone</label>
+            <div class="input-group">
+                <label><span class="emoji">📞</span> Telefone</label>
                 <input type="tel" name="telefone" placeholder="(11) 99999-9999" required>
             </div>
 
-            <div class="field-group">
-                <label><i>🎂</i> Data de nascimento</label>
+            <div class="input-group">
+                <label><span class="emoji">🎂</span> Data de nascimento</label>
                 <input type="date" name="nascimento" required>
             </div>
 
-            <!-- INFORMAÇÕES DE SAÚDE (full width) -->
-            <div class="field-group full-width">
-                <label><i>❤️</i> Informações de saúde</label>
-                <textarea name="saude" placeholder="Descreva condições médicas, lesões, alergias ou outras observações relevantes..."></textarea>
+            <!-- SAÚDE (ocupa linha inteira) -->
+            <div class="input-group span-2">
+                <label><span class="emoji">❤️</span> Informações de saúde</label>
+                <textarea name="saude" placeholder="Condições médicas, lesões, alergias ou outras observações importantes..."></textarea>
             </div>
 
             <!-- EXERCÍCIOS PREFERIDOS -->
-            <div class="field-group full-width">
-                <label><i>🏆</i> Exercícios de preferência</label>
+            <div class="input-group span-2">
+                <label><span class="emoji">🏆</span> Exercícios de preferência</label>
                 <div class="checkbox-group">
-                    <label class="checkbox-option">
+                    <label class="checkbox-pill">
                         <input type="checkbox" name="exercicios" value="musculacao"> Musculação
                     </label>
-                    <label class="checkbox-option">
+                    <label class="checkbox-pill">
                         <input type="checkbox" name="exercicios" value="cardio"> Cardio
                     </label>
-                    <label class="checkbox-option">
+                    <label class="checkbox-pill">
                         <input type="checkbox" name="exercicios" value="funcional"> Funcional
                     </label>
-                    <label class="checkbox-option">
+                    <label class="checkbox-pill">
                         <input type="checkbox" name="exercicios" value="yoga"> Yoga / Pilates
                     </label>
-                    <label class="checkbox-option">
+                    <label class="checkbox-pill">
                         <input type="checkbox" name="exercicios" value="lutas"> Lutas
                     </label>
-                    <label class="checkbox-option">
+                    <label class="checkbox-pill">
                         <input type="checkbox" name="exercicios" value="natacao"> Natação
                     </label>
                 </div>
             </div>
 
             <!-- PLANO -->
-            <div class="field-group full-width">
-                <label><i>💳</i> Plano escolhido</label>
+            <div class="input-group span-2">
+                <label><span class="emoji">💳</span> Plano escolhido</label>
                 <select name="plano" required>
                     <option value="" disabled selected>Selecione seu plano</option>
                     <option value="basico">Plano Básico – Acesso livre</option>
@@ -349,15 +402,14 @@
                 </select>
             </div>
 
-            <!-- Botão de envio -->
-            <div class="full-width">
+            <!-- BOTÃO -->
+            <div class="span-2">
                 <button type="submit" class="btn-submit">
                     ✅ Finalizar Cadastro
                 </button>
             </div>
         </form>
 
-        <!-- Link para voltar -->
         <div style="text-align: center;">
             <a href="index.html" class="back-link">← Voltar para a página inicial</a>
         </div>
