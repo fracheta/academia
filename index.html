@@ -26,18 +26,22 @@
     <style>
         /* ========== RESET & VARIÁVEIS ========== */
         :root {
-            --yellow: #FFC107;
-            --yellow-light: #FFD54F;
-            --orange: #F57C00;
+            --bg-primary: #0B0B0B;       /* fundo principal (quase preto) */
+            --bg-secondary: #1A1A1A;     /* fundo de cartões */
+            --orange: #F57C00;           /* laranja de destaque */
             --orange-dark: #E06B00;
-            --black: #1E1E1E;
-            --black-soft: #2C2C2C;
+            --orange-light: #FF9800;
+            --yellow: #FFC107;           /* amarelo pontual */
+            --yellow-soft: #FFD54F;
             --white: #FFFFFF;
-            --gray-light: #F5F5F5;
-            --gray-medium: #CCCCCC;
-            --shadow-sm: 0 4px 12px rgba(0,0,0,0.08);
-            --shadow-md: 0 12px 30px rgba(245, 124, 0, 0.3);
-            --shadow-lg: 0 20px 40px rgba(0,0,0,0.12);
+            --gray-light: #CCCCCC;
+            --text-dark: #1E1E1E;
+            --text-light: #F5F5F5;
+            --border-subtle: rgba(255,255,255,0.08);
+            
+            --shadow-sm: 0 4px 12px rgba(0,0,0,0.3);
+            --shadow-md: 0 12px 30px rgba(245, 124, 0, 0.35);
+            --shadow-lg: 0 20px 45px rgba(0,0,0,0.5);
             --transition-base: 0.35s cubic-bezier(0.25, 0.8, 0.25, 1.2);
             --transition-smooth: 0.3s ease;
             --border-radius-sm: 12px;
@@ -58,8 +62,8 @@
 
         body {
             font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: #0F0F0F;
-            color: var(--black);
+            background: #000000;
+            color: var(--text-light);
             line-height: 1.6;
             min-height: 100vh;
             overflow-x: hidden;
@@ -67,9 +71,8 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* ========== LAYOUT PRINCIPAL ========== */
         .page-wrapper {
-            background-color: var(--yellow);
+            background-color: var(--bg-primary);
             position: relative;
             max-width: 100%;
         }
@@ -80,7 +83,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 1.2rem 5%;
-            background: rgba(255, 193, 7, 0.85);
+            background: rgba(11, 11, 11, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             flex-wrap: wrap;
@@ -89,35 +92,19 @@
             top: 0;
             z-index: 1000;
             transition: background var(--transition-smooth), box-shadow var(--transition-smooth);
-            border-bottom: 1px solid rgba(245, 124, 0, 0.15);
+            border-bottom: 1px solid var(--border-subtle);
         }
 
         @supports not (backdrop-filter: blur(20px)) {
             .top-header {
-                background: rgba(255, 193, 7, 0.95);
+                background: rgba(11, 11, 11, 0.98);
             }
         }
 
         .top-header.scrolled {
-            background: rgba(30, 30, 30, 0.92);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-            border-bottom-color: transparent;
-        }
-        .top-header.scrolled .brand-name {
-            color: var(--yellow);
-            border-color: var(--orange);
-            background: rgba(255,255,255,0.08);
-        }
-        .top-header.scrolled .logo-svg {
-            filter: brightness(1.2);
-        }
-        .top-header.scrolled .btn-header-outline {
-            border-color: var(--yellow);
-            color: var(--yellow);
-        }
-        .top-header.scrolled .btn-header-outline:hover {
-            background: var(--yellow);
-            color: var(--black);
+            background: rgba(11, 11, 11, 0.95);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+            border-bottom-color: var(--orange);
         }
 
         .brand-area {
@@ -126,48 +113,38 @@
             gap: 1rem;
         }
 
-        /* Logo placeholder via SVG inline (profissional) */
         .logo-placeholder {
             width: 55px;
             height: 55px;
-            background: var(--black);
+            background: var(--orange);
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             border: 2px solid var(--orange);
             transition: var(--transition-smooth);
-            animation: float 3s ease-in-out infinite;
             flex-shrink: 0;
         }
         .logo-placeholder svg {
             width: 32px;
             height: 32px;
-            fill: var(--yellow);
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
+            fill: var(--white);
         }
 
         .brand-name {
             font-size: 1.7rem;
             font-weight: 800;
             letter-spacing: -0.5px;
-            color: var(--black);
-            background: rgba(255,255,255,0.4);
+            color: var(--white);
+            background: transparent;
             padding: 0.3rem 1.4rem;
             border-radius: var(--border-radius-sm);
-            border: 2px solid var(--black);
+            border: 2px solid var(--orange);
             text-transform: uppercase;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
             transition: all var(--transition-smooth);
             white-space: nowrap;
         }
 
-        /* Navegação */
         .header-nav {
             display: flex;
             gap: 0.7rem;
@@ -191,14 +168,14 @@
             white-space: nowrap;
         }
         .btn-header-outline {
-            border-color: var(--black);
-            color: var(--black);
+            border-color: var(--orange);
+            color: var(--orange);
         }
         .btn-header-outline:hover {
-            background: var(--black);
-            color: var(--yellow);
+            background: var(--orange);
+            color: var(--white);
             transform: translateY(-2px);
-            box-shadow: var(--shadow-sm);
+            box-shadow: 0 4px 15px rgba(245,124,0,0.4);
         }
         .btn-header-orange {
             background: var(--orange);
@@ -212,7 +189,7 @@
             box-shadow: 0 8px 20px rgba(245,124,0,0.6);
         }
 
-        /* ========== HERO SECTION ========== */
+        /* ========== HERO SECTION (com fundo escuro e laranja sutil) ========== */
         .hero-section {
             position: relative;
             width: 100%;
@@ -230,7 +207,8 @@
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(255,193,7,0.45) 0%, rgba(245,124,0,0.35) 100%);
+            /* Gradiente escuro com um leve toque de laranja */
+            background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(30,30,30,0.7) 100%);
             z-index: 1;
         }
 
@@ -245,14 +223,8 @@
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .hero-badge {
@@ -266,12 +238,12 @@
             letter-spacing: 1.5px;
             margin-bottom: 1.8rem;
             text-transform: uppercase;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
             animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(245,124,0,0.5); }
+            0% { box-shadow: 0 0 0 0 rgba(245,124,0,0.6); }
             70% { box-shadow: 0 0 0 15px rgba(245,124,0,0); }
             100% { box-shadow: 0 0 0 0 rgba(245,124,0,0); }
         }
@@ -280,29 +252,29 @@
             font-size: clamp(2.8rem, 7vw, 4.8rem);
             font-weight: 900;
             line-height: 1.1;
-            color: var(--black);
-            text-shadow: 2px 2px 15px rgba(255,255,255,0.3);
+            color: var(--white);
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.5);
             margin-bottom: 1.5rem;
         }
         .hero-title .highlight {
-            color: white;
+            color: var(--white);
             background: var(--orange);
             padding: 0.1rem 0.5rem;
             display: inline-block;
             transform: rotate(-1deg);
             border-radius: 4px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
         .hero-description {
             font-size: 1.25rem;
             max-width: 650px;
             margin: 0 auto 2.5rem;
-            color: var(--black);
+            color: var(--text-light);
             font-weight: 500;
-            background: rgba(255,255,255,0.35);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             padding: 1.2rem 2rem;
             border-radius: var(--border-radius-md);
             border-left: 5px solid var(--orange);
@@ -341,7 +313,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
             transform: translateX(-100%);
             transition: transform 0.4s;
         }
@@ -357,55 +329,47 @@
         .btn-create:hover {
             background: var(--orange-dark);
             transform: translateY(-4px);
-            box-shadow: 0 18px 40px rgba(245,124,0,0.55);
+            box-shadow: 0 18px 40px rgba(245,124,0,0.6);
         }
 
         .btn-login {
-            background: var(--black);
-            color: var(--yellow);
-            border-color: var(--black);
+            background: transparent;
+            color: var(--orange);
+            border-color: var(--orange);
         }
         .btn-login:hover {
-            background: var(--black-soft);
-            border-color: var(--orange);
+            background: var(--orange);
             color: white;
             transform: translateY(-4px);
         }
 
         .btn-manager {
             background: transparent;
-            color: var(--black);
-            border: 2px solid var(--black);
+            color: var(--gray-light);
+            border: 2px solid rgba(255,255,255,0.3);
             backdrop-filter: blur(6px);
             -webkit-backdrop-filter: blur(6px);
-            font-weight: 700;
         }
         .btn-manager:hover {
-            background: var(--black);
-            color: var(--yellow);
-            border-color: var(--black);
+            background: rgba(255,255,255,0.1);
+            border-color: var(--orange);
+            color: var(--orange);
             transform: translateY(-4px);
         }
 
-        /* Ícones nos botões */
-        .btn-icon {
-            width: 18px;
-            height: 18px;
-            flex-shrink: 0;
-        }
-
-        /* ========== SEÇÃO DIFERENCIAIS ========== */
+        /* ========== SEÇÃO DIFERENCIAIS (fundo escuro) ========== */
         .info-section {
-            background: var(--yellow);
+            background: var(--bg-primary);
             padding: 5rem 5% 4rem;
             position: relative;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
 
         .section-title {
             text-align: center;
             font-size: 2.7rem;
             font-weight: 900;
-            color: var(--black);
+            color: var(--white);
             margin-bottom: 3rem;
             position: relative;
             letter-spacing: -0.5px;
@@ -414,7 +378,7 @@
             content: '';
             display: block;
             width: 80px;
-            height: 5px;
+            height: 4px;
             background: var(--orange);
             margin: 1rem auto 0;
             border-radius: 5px;
@@ -429,18 +393,16 @@
         }
 
         .feature-card {
-            background: rgba(255,255,255,0.4);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            background: var(--bg-secondary);
             border-radius: var(--border-radius-lg);
             padding: 2.5rem 1.5rem;
             text-align: center;
-            border: 1px solid rgba(245,124,0,0.2);
+            border: 1px solid rgba(255,255,255,0.06);
             transition: var(--transition-base);
             box-shadow: var(--shadow-sm);
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease, box-shadow var(--transition-smooth), background var(--transition-smooth);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color var(--transition-smooth), box-shadow var(--transition-smooth);
         }
         .feature-card.visible {
             opacity: 1;
@@ -448,9 +410,9 @@
         }
         .feature-card:hover {
             transform: translateY(-10px);
-            background: rgba(255,255,255,0.7);
             border-color: var(--orange);
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            background: #222222;
         }
 
         .feature-icon {
@@ -466,7 +428,7 @@
         }
         .feature-card:hover .feature-icon {
             transform: scale(1.1);
-            background: var(--black);
+            background: var(--orange-light);
         }
         .feature-icon svg {
             width: 32px;
@@ -477,27 +439,27 @@
         .feature-card h3 {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--black);
+            color: var(--white);
             margin: 1rem 0 0.8rem;
         }
         .feature-card p {
-            color: var(--black-soft);
+            color: #AAAAAA;
             font-weight: 500;
             line-height: 1.6;
         }
 
         /* Depoimento */
         .testimonial-strip {
-            background: var(--black);
-            color: var(--yellow);
+            background: #000000;
+            color: var(--white);
             padding: 2.5rem 5%;
             text-align: center;
             font-style: italic;
             font-size: 1.3rem;
             font-weight: 500;
             margin-top: 3rem;
-            border-top: 4px solid var(--orange);
-            border-bottom: 4px solid var(--orange);
+            border-top: 3px solid var(--orange);
+            border-bottom: 3px solid var(--orange);
             position: relative;
             border-radius: 4px;
         }
@@ -508,17 +470,17 @@
             left: 3%;
             top: -25px;
             color: var(--orange);
-            opacity: 0.5;
+            opacity: 0.4;
             font-style: normal;
             line-height: 1;
         }
         .testimonial-strip .author {
             font-weight: 800;
-            color: white;
+            color: var(--yellow);
             font-style: normal;
         }
 
-        /* ========== SEÇÃO DE NÚMEROS ========== */
+        /* ========== SEÇÃO DE NÚMEROS (laranja mantido para contraste) ========== */
         .stats-section {
             background: var(--orange);
             padding: 3rem 5%;
@@ -528,25 +490,28 @@
             gap: 3rem;
             color: white;
             text-align: center;
+            border-top: 3px solid #000000;
         }
         .stat-item h3 {
             font-size: 3.2rem;
             font-weight: 900;
             margin-bottom: 0.3rem;
             letter-spacing: -0.5px;
+            color: #000;
         }
         .stat-item p {
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             font-size: 0.9rem;
+            color: #000;
             opacity: 0.9;
         }
 
         /* ========== FOOTER ========== */
         .footer-main {
-            background: #0F0F0F;
-            color: #AAAAAA;
+            background: #000000;
+            color: #888888;
             padding: 2rem 5%;
             display: flex;
             flex-wrap: wrap;
@@ -554,18 +519,19 @@
             align-items: center;
             gap: 1rem;
             font-size: 0.9rem;
+            border-top: 1px solid #222;
         }
         .footer-links {
             display: flex;
             gap: 1.5rem;
         }
         .footer-links a {
-            color: var(--gray-medium);
+            color: #AAAAAA;
             text-decoration: none;
             transition: color var(--transition-smooth);
         }
         .footer-links a:hover {
-            color: var(--yellow);
+            color: var(--orange);
         }
 
         /* ========== RESPONSIVIDADE ========== */
@@ -636,7 +602,6 @@
         <header class="top-header" id="header" role="banner">
             <div class="brand-area">
                 <a href="/" aria-label="Página inicial da academia" class="logo-placeholder">
-                    <!-- Ícone SVG de haltere profissional -->
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14 4.14 5.57 2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29l-1.43-1.43z"/>
                     </svg>
@@ -668,15 +633,15 @@
                     </p>
                     <div class="hero-buttons">
                         <a href="cadastro.html" class="btn btn-create">
-                            <svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm5 11h-4v4h-2v-4H5V9h4V5h2v4h4v2z"/></svg>
+                            <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm5 11h-4v4h-2v-4H5V9h4V5h2v4h4v2z"/></svg>
                             Criar Conta
                         </a>
                         <a href="login.html" class="btn btn-login">
-                            <svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                            <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
                             Entrar
                         </a>
                         <a href="gestor.html" class="btn btn-manager">
-                            <svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M19.43 12.87c-.11-.31-.38-.53-.69-.59l-1.69-.24-.76-1.56c-.16-.33-.5-.54-.85-.54-.02 0-.04 0-.06.01l-.06.02c-.34.13-.55.45-.52.81l.13 1.69-1.34.82c-.27.17-.42.47-.39.78.03.31.22.59.5.73l1.45.73-.13 1.69c-.04.36.16.71.5.86l.06.02c.33.13.71.01.95-.28l1.14-1.34 1.5.88c.28.16.62.16.89 0 .28-.16.44-.46.44-.78l-.03-1.7 1.34-.97c.27-.19.41-.52.37-.85-.04-.34-.24-.63-.53-.77l-1.45-.73.13-1.69c.03-.36-.16-.71-.5-.86zM10 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                            <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M19.43 12.87c-.11-.31-.38-.53-.69-.59l-1.69-.24-.76-1.56c-.16-.33-.5-.54-.85-.54-.02 0-.04 0-.06.01l-.06.02c-.34.13-.55.45-.52.81l.13 1.69-1.34.82c-.27.17-.42.47-.39.78.03.31.22.59.5.73l1.45.73-.13 1.69c-.04.36.16.71.5.86l.06.02c.33.13.71.01.95-.28l1.14-1.34 1.5.88c.28.16.62.16.89 0 .28-.16.44-.46.44-.78l-.03-1.7 1.34-.97c.27-.19.41-.52.37-.85-.04-.34-.24-.63-.53-.77l-1.45-.73.13-1.69c.03-.36-.16-.71-.5-.86zM10 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
                             Gestor
                         </a>
                     </div>
@@ -753,12 +718,11 @@
         </footer>
     </div>
 
-    <!-- ========== SCRIPTS OTIMIZADOS ========== -->
+    <!-- ========== SCRIPTS ========== -->
     <script>
-        // Ano dinâmico no footer
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Header com efeito ao scroll (com debounce para performance)
+        // Header com efeito ao scroll (debounce)
         const header = document.getElementById('header');
         let ticking = false;
         window.addEventListener('scroll', () => {
@@ -771,37 +735,30 @@
             }
         });
 
-        // Animação de entrada dos cards (Intersection Observer)
+        // Animação dos cards
         const cards = document.querySelectorAll('.feature-card');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
         }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
         cards.forEach(card => observer.observe(card));
 
-        // Contador animado com requestAnimationFrame
+        // Contador animado
         const counters = document.querySelectorAll('.counter');
-        const duration = 1500; // duração total da animação em ms
+        const duration = 1500;
 
         const animateCounter = (counter, target) => {
             const start = performance.now();
-            const initial = 0;
-            
             const step = (currentTime) => {
                 const elapsed = currentTime - start;
                 const progress = Math.min(elapsed / duration, 1);
-                // Easing easeOutExpo para desaceleração suave
                 const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-                const current = Math.floor(initial + (target - initial) * eased);
-                counter.textContent = current;
-                
+                counter.textContent = Math.floor(target * eased);
                 if (progress < 1) {
                     requestAnimationFrame(step);
                 } else {
-                    counter.textContent = target; // garantir número final exato
+                    counter.textContent = target;
                 }
             };
             requestAnimationFrame(step);
