@@ -4,32 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Painel | Nome da Academia</title>
-    <meta name="description" content="Painel do aluno - acompanhe seus treinos, aulas, progresso e loja da academia.">
-
+    <meta name="description" content="Central do aluno - acesse seus treinos, loja, saúde e muito mais.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
     <style>
         :root {
             --bg-primary: #0B0B0B;
-            --bg-secondary: #1A1A1A;
-            --bg-card: #151515;
+            --bg-card: rgba(21, 21, 21, 0.8);
             --orange: #F57C00;
             --orange-dark: #E06B00;
             --orange-light: #FF9800;
-            --yellow: #FFC107;
             --white: #FFFFFF;
             --gray-light: #CCCCCC;
             --gray-mid: #999999;
-            --gray-dark: #444444;
-            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-subtle: rgba(255, 255, 255, 0.08);
             --border-orange: rgba(245, 124, 0, 0.3);
-            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
-            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.5);
-            --shadow-orange: 0 8px 25px rgba(245, 124, 0, 0.25);
+            --shadow-md: 0 15px 35px rgba(0,0,0,0.6);
+            --shadow-orange: 0 10px 25px rgba(245,124,0,0.3);
             --transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1.2);
-            --transition-smooth: 0.25s ease;
             --radius-sm: 12px;
             --radius-md: 18px;
             --radius-lg: 24px;
@@ -43,8 +36,8 @@
         }
 
         body {
-            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: #000000;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: #000;
             color: var(--white);
             line-height: 1.6;
             min-height: 100vh;
@@ -52,7 +45,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* ========== FUNDO COM IMAGEM ========== */
+        /* Fundo fixo */
         .bg-image {
             position: fixed;
             top: 0;
@@ -62,21 +55,20 @@
             object-fit: cover;
             z-index: -2;
             background: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
-            filter: brightness(0.3) saturate(0.4);
+            filter: brightness(0.35) saturate(0.5);
         }
 
         .overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.75);
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.85) 100%);
             z-index: -1;
         }
 
-        /* ========== LAYOUT GERAL ========== */
         .dashboard {
-            max-width: 1300px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem 1.5rem 2rem;
+            padding: 1.2rem 1.5rem 2rem;
             position: relative;
             z-index: 1;
         }
@@ -86,16 +78,16 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(21, 21, 21, 0.85);
+            background: rgba(15,15,15,0.75);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: var(--radius-xl);
-            padding: 0.8rem 1.8rem;
-            margin-bottom: 1.8rem;
+            padding: 0.7rem 1.8rem;
+            margin-bottom: 2rem;
             border: 1px solid var(--border-subtle);
             flex-wrap: wrap;
             gap: 1rem;
-            box-shadow: var(--shadow-md);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .brand {
@@ -104,8 +96,8 @@
             gap: 0.8rem;
         }
         .logo-small {
-            width: 45px;
-            height: 45px;
+            width: 46px;
+            height: 46px;
             background: var(--orange);
             border-radius: 14px;
             display: flex;
@@ -122,18 +114,17 @@
             font-weight: 800;
             font-size: 1.2rem;
             text-transform: uppercase;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.3px;
             color: var(--white);
             border: 2px solid var(--orange);
             padding: 0.3rem 1rem;
             border-radius: var(--radius-sm);
-            white-space: nowrap;
         }
 
         .user-menu {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.2rem;
         }
         .greeting {
             font-weight: 600;
@@ -144,8 +135,8 @@
             color: var(--orange);
         }
         .avatar {
-            width: 45px;
-            height: 45px;
+            width: 44px;
+            height: 44px;
             background: var(--orange);
             border-radius: 50%;
             display: flex;
@@ -154,9 +145,9 @@
             font-weight: 800;
             color: white;
             font-size: 1.1rem;
-            cursor: pointer;
             border: 2px solid var(--orange-light);
-            transition: var(--transition-smooth);
+            transition: var(--transition);
+            cursor: pointer;
         }
         .avatar:hover {
             box-shadow: var(--shadow-orange);
@@ -165,12 +156,12 @@
             background: transparent;
             border: 1px solid rgba(255,255,255,0.2);
             color: var(--gray-mid);
-            padding: 0.4rem 1rem;
+            padding: 0.4rem 1.2rem;
             border-radius: var(--radius-xl);
-            cursor: pointer;
             font-weight: 600;
             font-size: 0.8rem;
-            transition: var(--transition-smooth);
+            cursor: pointer;
+            transition: var(--transition);
             text-decoration: none;
         }
         .logout-btn:hover {
@@ -178,118 +169,141 @@
             color: #ff4444;
         }
 
-        /* ========== GRID PRINCIPAL ========== */
-        .main-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 1.3rem;
-            margin-bottom: 1.3rem;
+        /* ========== HERO / SAUDAÇÃO ========== */
+        .welcome-hero {
+            text-align: center;
+            margin-bottom: 2.5rem;
         }
-
-        /* ========== CARDS ========== */
-        .card {
-            background: var(--bg-card);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            border: 1px solid var(--border-subtle);
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-        }
-        .card:hover {
-            border-color: var(--border-orange);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.5);
-        }
-
-        .card-title {
-            font-size: 0.9rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1rem;
-            color: var(--orange);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .card-title svg {
-            width: 18px;
-            height: 18px;
-            fill: var(--orange);
-        }
-
-        /* Card de boas-vindas */
-        .welcome-card {
-            background: linear-gradient(135deg, rgba(245,124,0,0.25), rgba(21,21,21,0.9));
-            border: 1px solid var(--border-orange);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .welcome-card h2 {
-            font-size: 1.8rem;
+        .welcome-hero h2 {
+            font-size: clamp(2rem, 5vw, 2.8rem);
             font-weight: 900;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.4rem;
+            line-height: 1.2;
             color: var(--white);
+            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
-        .welcome-card .highlight {
+        .welcome-hero h2 .highlight {
             color: var(--orange);
+            background: rgba(245,124,0,0.15);
+            padding: 0.1rem 0.4rem;
+            border-radius: 6px;
         }
-        .welcome-card p {
-            font-weight: 500;
+        .welcome-hero p {
+            font-size: 1.1rem;
             color: var(--gray-light);
+            max-width: 500px;
+            margin: 0 auto;
             opacity: 0.85;
         }
 
-        /* Cards de atalho */
-        .shortcut-card {
+        /* ========== GRID DE NAVEGAÇÃO PRINCIPAL ========== */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .nav-card {
+            position: relative;
+            background: rgba(21,21,21,0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: var(--radius-lg);
+            padding: 2.2rem 1.5rem;
             text-align: center;
+            border: 1px solid var(--border-subtle);
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            cursor: pointer;
-            transition: var(--transition);
+            gap: 1rem;
         }
-        .shortcut-card:hover {
-            background: #1F1F1F;
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(245,124,0,0.15), transparent 60%);
+            opacity: 0;
+            transition: opacity var(--transition);
+        }
+        .nav-card:hover {
+            transform: translateY(-8px);
             border-color: var(--orange);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.7), 0 0 30px rgba(245,124,0,0.15);
         }
-        .shortcut-icon {
-            width: 60px;
-            height: 60px;
+        .nav-card:hover::before {
+            opacity: 1;
+        }
+
+        .nav-icon {
+            width: 80px;
+            height: 80px;
             background: var(--orange);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 0.2rem;
+            position: relative;
+            z-index: 1;
+            transition: var(--transition);
+            box-shadow: 0 8px 20px rgba(245,124,0,0.4);
         }
-        .shortcut-icon svg {
-            width: 28px;
-            height: 28px;
+        .nav-card:hover .nav-icon {
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(245,124,0,0.6);
+        }
+        .nav-icon svg {
+            width: 40px;
+            height: 40px;
             fill: white;
         }
-        .shortcut-card strong {
-            font-size: 0.9rem;
+
+        .nav-card h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
             color: var(--white);
+            position: relative;
+            z-index: 1;
         }
-        .shortcut-card small {
-            font-size: 0.75rem;
+        .nav-card p {
+            font-size: 0.9rem;
             color: var(--gray-mid);
+            position: relative;
+            z-index: 1;
+            line-height: 1.4;
         }
 
-        /* ========== ESTATÍSTICAS ========== */
+        .nav-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--orange);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 0.2rem 0.8rem;
+            border-radius: var(--radius-xl);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 2;
+        }
+
+        /* ========== ESTATÍSTICAS RÁPIDAS ========== */
         .stats-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1.3rem;
-            margin-bottom: 1.3rem;
+            gap: 1.2rem;
+            margin-bottom: 2.5rem;
         }
         .stat-card {
-            background: var(--bg-card);
+            background: rgba(21,21,21,0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-radius: var(--radius-md);
             padding: 1.2rem;
             display: flex;
@@ -319,327 +333,14 @@
             line-height: 1;
         }
         .stat-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--gray-mid);
+            margin-top: 3px;
             font-weight: 500;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            color: var(--gray-mid);
-            margin-top: 2px;
         }
 
-        /* ========== SEÇÃO LOJA ========== */
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-        }
-        .section-title {
-            font-size: 1.3rem;
-            font-weight: 900;
-            color: var(--white);
-            letter-spacing: -0.5px;
-        }
-        .section-title span {
-            color: var(--orange);
-        }
-        .see-all {
-            color: var(--orange);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.85rem;
-            transition: var(--transition-smooth);
-        }
-        .see-all:hover {
-            color: var(--orange-light);
-        }
-
-        .shop-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.3rem;
-            margin-bottom: 1.8rem;
-        }
-        .product-card {
-            background: var(--bg-card);
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            border: 1px solid var(--border-subtle);
-            transition: var(--transition);
-            cursor: pointer;
-        }
-        .product-card:hover {
-            border-color: var(--orange);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
-        }
-        .product-img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            background: #1A1A1A;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-        }
-        .product-info {
-            padding: 1rem;
-        }
-        .product-category {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            color: var(--orange);
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-        .product-name {
-            font-weight: 700;
-            font-size: 0.95rem;
-            color: var(--white);
-            margin: 0.3rem 0;
-        }
-        .product-price {
-            font-weight: 900;
-            font-size: 1.2rem;
-            color: var(--orange);
-        }
-        .product-price .old {
-            font-size: 0.75rem;
-            color: var(--gray-mid);
-            text-decoration: line-through;
-            font-weight: 500;
-            margin-left: 0.4rem;
-        }
-        .btn-buy {
-            display: block;
-            width: 100%;
-            padding: 0.6rem;
-            background: var(--orange);
-            color: white;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-weight: 700;
-            font-size: 0.85rem;
-            cursor: pointer;
-            margin-top: 0.8rem;
-            transition: var(--transition-smooth);
-        }
-        .btn-buy:hover {
-            background: var(--orange-dark);
-        }
-
-        /* ========== GRADE DE AULAS + TREINO ========== */
-        .two-col {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.3rem;
-            margin-bottom: 1.3rem;
-        }
-
-        .class-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-        .class-item:last-child {
-            border-bottom: none;
-        }
-        .class-time-badge {
-            background: rgba(245,124,0,0.2);
-            color: var(--orange);
-            padding: 0.3rem 0.7rem;
-            border-radius: var(--radius-sm);
-            font-weight: 700;
-            font-size: 0.8rem;
-            white-space: nowrap;
-        }
-        .class-info .class-name {
-            font-weight: 700;
-            font-size: 0.9rem;
-            color: var(--white);
-        }
-        .class-info .class-detail {
-            font-size: 0.75rem;
-            color: var(--gray-mid);
-        }
-        .btn-reserve {
-            background: transparent;
-            border: 1px solid var(--orange);
-            color: var(--orange);
-            padding: 0.4rem 1rem;
-            border-radius: var(--radius-xl);
-            font-size: 0.75rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition-smooth);
-            white-space: nowrap;
-        }
-        .btn-reserve:hover {
-            background: var(--orange);
-            color: white;
-        }
-
-        /* Treino do dia */
-        .workout-exercise {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 0.7rem 0;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-        .workout-exercise:last-child {
-            border-bottom: none;
-        }
-        .exercise-num {
-            width: 28px;
-            height: 28px;
-            background: var(--orange);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 0.75rem;
-            color: white;
-            flex-shrink: 0;
-        }
-        .exercise-info .ex-name {
-            font-weight: 700;
-            font-size: 0.9rem;
-            color: var(--white);
-        }
-        .exercise-info .ex-detail {
-            font-size: 0.75rem;
-            color: var(--gray-mid);
-        }
-
-        /* ========== PROGRESSO ========== */
-        .progress-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.3rem;
-            margin-bottom: 1.3rem;
-        }
-        .bar-container {
-            display: flex;
-            flex-direction: column;
-            gap: 0.9rem;
-            margin-top: 0.5rem;
-        }
-        .bar-item {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-        .bar-label {
-            width: 90px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            color: var(--gray-light);
-            flex-shrink: 0;
-        }
-        .bar-bg {
-            flex: 1;
-            height: 10px;
-            background: rgba(255,255,255,0.08);
-            border-radius: 20px;
-            overflow: hidden;
-        }
-        .bar-fill {
-            height: 100%;
-            background: var(--orange);
-            border-radius: 20px;
-            width: 0%;
-            transition: width 1.5s ease;
-        }
-        .bar-percent {
-            font-weight: 700;
-            font-size: 0.8rem;
-            color: var(--orange);
-            width: 35px;
-            text-align: right;
-        }
-
-        /* Metas */
-        .goal-item {
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-            padding: 0.6rem 0;
-            font-size: 0.9rem;
-            color: var(--gray-light);
-        }
-        .goal-done {
-            color: #4CAF50;
-            font-weight: 700;
-        }
-        .goal-pending {
-            color: var(--orange);
-            font-weight: 600;
-        }
-
-        /* ========== NUTRIÇÃO ========== */
-        .nutrition-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.3rem;
-            margin-bottom: 1.8rem;
-        }
-        .nutrition-card {
-            background: var(--bg-card);
-            border-radius: var(--radius-md);
-            padding: 1.2rem;
-            text-align: center;
-            border: 1px solid var(--border-subtle);
-        }
-        .nutrition-value {
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--orange);
-        }
-        .nutrition-label {
-            font-size: 0.8rem;
-            color: var(--gray-mid);
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        /* ========== EVENTOS ========== */
-        .event-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-        .event-date {
-            background: var(--orange);
-            color: white;
-            border-radius: var(--radius-sm);
-            padding: 0.5rem 0.7rem;
-            text-align: center;
-            font-weight: 800;
-            font-size: 0.75rem;
-            line-height: 1.2;
-            flex-shrink: 0;
-        }
-        .event-date span {
-            display: block;
-            font-size: 1.3rem;
-        }
-        .event-info .event-name {
-            font-weight: 700;
-            font-size: 0.9rem;
-            color: var(--white);
-        }
-        .event-info .event-detail {
-            font-size: 0.75rem;
-            color: var(--gray-mid);
-        }
-
-        /* ========== FOOTER ========== */
+        /* ========== RODAPÉ ========== */
         .footer-dash {
             text-align: center;
             padding: 1.5rem 0 0;
@@ -650,42 +351,21 @@
         }
 
         /* ========== RESPONSIVIDADE ========== */
-        @media (max-width: 1100px) {
-            .main-grid {
+        @media (max-width: 900px) {
+            .nav-grid {
                 grid-template-columns: 1fr 1fr;
             }
-            .welcome-card {
-                grid-column: span 2;
-            }
-            .shop-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .two-col {
-                grid-template-columns: 1fr;
-            }
-            .nutrition-row {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
             .stats-row {
                 grid-template-columns: repeat(2, 1fr);
             }
-            .main-grid {
+        }
+
+        @media (max-width: 600px) {
+            .nav-grid {
                 grid-template-columns: 1fr;
             }
-            .welcome-card {
-                grid-column: span 1;
-            }
-            .shop-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .progress-section {
+            .stats-row {
                 grid-template-columns: 1fr;
-            }
-            .nutrition-row {
-                grid-template-columns: 1fr 1fr;
             }
             .top-bar {
                 flex-direction: column;
@@ -695,19 +375,8 @@
                 width: 100%;
                 justify-content: space-between;
             }
-        }
-
-        @media (max-width: 480px) {
-            .stats-row,
-            .shop-grid,
-            .nutrition-row {
-                grid-template-columns: 1fr;
-            }
-            .two-col {
-                grid-template-columns: 1fr;
-            }
-            .product-img {
-                height: 120px;
+            .welcome-hero h2 {
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -732,40 +401,41 @@
             </div>
         </header>
 
-        <!-- ========== GRID PRINCIPAL ========== -->
-        <div class="main-grid">
-            <div class="card welcome-card">
-                <h2>Bem-vindo de volta, <span class="highlight">Aluno</span>!</h2>
-                <p>Pronto para mais um dia de superação? Seu resumo está abaixo.</p>
-            </div>
-            <div class="card shortcut-card">
-                <div class="shortcut-icon">
-                    <svg viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm-2 14l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+        <!-- ========== SAUDAÇÃO ========== -->
+        <div class="welcome-hero">
+            <h2>Seu <span class="highlight">espaço</span> de evolução</h2>
+            <p>Acompanhe seus treinos, adquira produtos exclusivos e cuide da sua saúde em um só lugar.</p>
+        </div>
+
+        <!-- ========== CARDS DE NAVEGAÇÃO PRINCIPAIS ========== -->
+        <div class="nav-grid">
+            <!-- Roupas -->
+            <a href="12.html" class="nav-card">
+                <span class="nav-badge">Novo</span>
+                <div class="nav-icon">
+                    <svg viewBox="0 0 24 24"><path d="M21 2H3v2h18V2zm-4 4H7v2h10V6zM5 10h14v2H5v-2zm-2 4h18v2H3v-2zm4 4h10v2H7v-2z"/></svg>
                 </div>
-                <strong>Meus Treinos</strong>
-                <small>Ver plano atual</small>
-            </div>
-            <div class="card shortcut-card">
-                <div class="shortcut-icon">
-                    <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7v-5z"/></svg>
+                <h3>Roupas & Vestuário</h3>
+                <p>Camisetas, regatas, leggings e acessórios de moda fitness com a marca da academia.</p>
+            </a>
+
+            <!-- Itens de Treino -->
+            <a href="13.html" class="nav-card">
+                <div class="nav-icon">
+                    <svg viewBox="0 0 24 24"><path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14 4.14 5.57 2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29l-1.43-1.43z"/></svg>
                 </div>
-                <strong>Agenda</strong>
-                <small>Aulas da semana</small>
-            </div>
-            <div class="card shortcut-card">
-                <div class="shortcut-icon">
-                    <svg viewBox="0 0 24 24"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99l1.5 1.5z"/></svg>
+                <h3>Itens de Treino</h3>
+                <p>Luvas, cintos, straps, garrafas e tudo que você precisa para potencializar seu rendimento.</p>
+            </a>
+
+            <!-- Saúde & Treino -->
+            <a href="14.html" class="nav-card">
+                <div class="nav-icon">
+                    <svg viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg>
                 </div>
-                <strong>Progresso</strong>
-                <small>Evolução corporal</small>
-            </div>
-            <div class="card shortcut-card">
-                <div class="shortcut-icon">
-                    <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.38.12-.56l-1.89-3.28c-.12-.19-.36-.26-.56-.18l-2.39.96c-.5-.38-1.05-.68-1.65-.87L14.35 2.5c-.04-.28-.28-.5-.56-.5h-3.78c-.28 0-.52.22-.56.5l-.44 3.01c-.6.19-1.15.49-1.65.87l-2.39-.96c-.2-.08-.44-.01-.56.18l-1.89 3.28c-.11.18-.06.42.12.56l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.38-.12.56l1.89 3.28c.12.19.36.26.56.18l2.39-.96c.5.38 1.05.68 1.65.87l.44 3.01c.04.28.28.5.56.5h3.78c.28 0 .52-.22.56-.5l.44-3.01c.6-.19 1.15-.49 1.65-.87l2.39.96c.2.08.44.01.56-.18l1.89-3.28c.11-.18.06-.42-.12-.56l-2.03-1.58zM12 15c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg>
-                </div>
-                <strong>Configurações</strong>
-                <small>Perfil e plano</small>
-            </div>
+                <h3>Saúde & Treino</h3>
+                <p>Planos de treino personalizados, avaliações físicas e acompanhamento nutricional integrado.</p>
+            </a>
         </div>
 
         <!-- ========== ESTATÍSTICAS RÁPIDAS ========== -->
@@ -808,234 +478,7 @@
             </div>
         </div>
 
-        <!-- ========== LOJA DA ACADEMIA ========== -->
-        <div class="section-header">
-            <h2 class="section-title">🛒 <span>Loja</span> da Academia</h2>
-            <a href="#" class="see-all">Ver todos os produtos →</a>
-        </div>
-        <div class="shop-grid">
-            <div class="product-card">
-                <div class="product-img">🥤</div>
-                <div class="product-info">
-                    <div class="product-category">Suplementos</div>
-                    <div class="product-name">Whey Protein 900g</div>
-                    <div class="product-price">R$ 129,90 <span class="old">R$ 159,90</span></div>
-                    <button class="btn-buy">Adicionar ao Carrinho</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-img">👕</div>
-                <div class="product-info">
-                    <div class="product-category">Vestuário</div>
-                    <div class="product-name">Camiseta Dry Fit</div>
-                    <div class="product-price">R$ 79,90</div>
-                    <button class="btn-buy">Adicionar ao Carrinho</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-img">🧴</div>
-                <div class="product-info">
-                    <div class="product-category">Acessórios</div>
-                    <div class="product-name">Luvas de Treino</div>
-                    <div class="product-price">R$ 49,90 <span class="old">R$ 69,90</span></div>
-                    <button class="btn-buy">Adicionar ao Carrinho</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-img">💊</div>
-                <div class="product-info">
-                    <div class="product-category">Suplementos</div>
-                    <div class="product-name">Creatina 300g</div>
-                    <div class="product-price">R$ 89,90</div>
-                    <button class="btn-buy">Adicionar ao Carrinho</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- ========== AULAS + TREINO DO DIA ========== -->
-        <div class="two-col">
-            <!-- Aulas disponíveis -->
-            <div class="card">
-                <div class="card-title">
-                    <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7v-5z"/></svg>
-                    Aulas de Hoje
-                </div>
-                <div class="class-item">
-                    <span class="class-time-badge">06:00</span>
-                    <div class="class-info">
-                        <div class="class-name">Spinning Intenso</div>
-                        <div class="class-detail">Prof. Ricardo · Sala 2</div>
-                    </div>
-                    <button class="btn-reserve">Reservar</button>
-                </div>
-                <div class="class-item">
-                    <span class="class-time-badge">08:00</span>
-                    <div class="class-info">
-                        <div class="class-name">Funcional</div>
-                        <div class="class-detail">Profª. Amanda · Sala 1</div>
-                    </div>
-                    <button class="btn-reserve">Reservar</button>
-                </div>
-                <div class="class-item">
-                    <span class="class-time-badge">18:00</span>
-                    <div class="class-info">
-                        <div class="class-name">Musculação Orientada</div>
-                        <div class="class-detail">Prof. Carlos · Sala 3</div>
-                    </div>
-                    <button class="btn-reserve">Reservar</button>
-                </div>
-                <div class="class-item">
-                    <span class="class-time-badge">19:30</span>
-                    <div class="class-info">
-                        <div class="class-name">Yoga & Relaxamento</div>
-                        <div class="class-detail">Profª. Juliana · Sala Zen</div>
-                    </div>
-                    <button class="btn-reserve">Reservar</button>
-                </div>
-            </div>
-
-            <!-- Treino do dia -->
-            <div class="card">
-                <div class="card-title">
-                    <svg viewBox="0 0 24 24"><path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14 4.14 5.57 2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29l-1.43-1.43z"/></svg>
-                    Treino de Hoje · Peito + Tríceps
-                </div>
-                <div class="workout-exercise">
-                    <span class="exercise-num">1</span>
-                    <div class="exercise-info">
-                        <div class="ex-name">Supino Reto</div>
-                        <div class="ex-detail">4x10 · 80% carga</div>
-                    </div>
-                </div>
-                <div class="workout-exercise">
-                    <span class="exercise-num">2</span>
-                    <div class="exercise-info">
-                        <div class="ex-name">Supino Inclinado</div>
-                        <div class="ex-detail">3x12 · 75% carga</div>
-                    </div>
-                </div>
-                <div class="workout-exercise">
-                    <span class="exercise-num">3</span>
-                    <div class="exercise-info">
-                        <div class="ex-name">Crucifixo</div>
-                        <div class="ex-detail">3x15 · 70% carga</div>
-                    </div>
-                </div>
-                <div class="workout-exercise">
-                    <span class="exercise-num">4</span>
-                    <div class="exercise-info">
-                        <div class="ex-name">Tríceps Corda</div>
-                        <div class="ex-detail">4x12 · 75% carga</div>
-                    </div>
-                </div>
-                <div class="workout-exercise">
-                    <span class="exercise-num">5</span>
-                    <div class="exercise-info">
-                        <div class="ex-name">Tríceps Francês</div>
-                        <div class="ex-detail">3x10 · 80% carga</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ========== PROGRESSO + METAS ========== -->
-        <div class="progress-section">
-            <div class="card">
-                <div class="card-title">
-                    <svg viewBox="0 0 24 24"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99l1.5 1.5z"/></svg>
-                    Progresso Mensal
-                </div>
-                <div class="bar-container">
-                    <div class="bar-item">
-                        <span class="bar-label">Força</span>
-                        <div class="bar-bg"><div class="bar-fill" data-width="75"></div></div>
-                        <span class="bar-percent">75%</span>
-                    </div>
-                    <div class="bar-item">
-                        <span class="bar-label">Cardio</span>
-                        <div class="bar-bg"><div class="bar-fill" data-width="60"></div></div>
-                        <span class="bar-percent">60%</span>
-                    </div>
-                    <div class="bar-item">
-                        <span class="bar-label">Flexibilidade</span>
-                        <div class="bar-bg"><div class="bar-fill" data-width="45"></div></div>
-                        <span class="bar-percent">45%</span>
-                    </div>
-                    <div class="bar-item">
-                        <span class="bar-label">Resistência</span>
-                        <div class="bar-bg"><div class="bar-fill" data-width="80"></div></div>
-                        <span class="bar-percent">80%</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">
-                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                    Metas da Semana
-                </div>
-                <div class="goal-item"><span class="goal-done">✅</span> 4 de 5 treinos concluídos</div>
-                <div class="goal-item"><span class="goal-done">✅</span> Beber 2L de água/dia</div>
-                <div class="goal-item"><span class="goal-pending">⏳</span> Atingir novo recorde no supino</div>
-                <div class="goal-item"><span class="goal-pending">⏳</span> Alongamento diário</div>
-            </div>
-        </div>
-
-        <!-- ========== NUTRIÇÃO + EVENTOS ========== -->
-        <div class="two-col">
-            <!-- Nutrição -->
-            <div class="card">
-                <div class="card-title">
-                    <svg viewBox="0 0 24 24"><path d="M18.06 23h1.66c.84 0 1.53-.65 1.63-1.47L23 5.05h-5V1h-1.97v4.05h-5.02l.71 16.47c.1.82.79 1.47 1.63 1.47h1.66c.83 0 1.52-.65 1.62-1.47L17 8.05h.06L17.06 23zM6 8.05v15h2v-15H6z"/></svg>
-                    Resumo Nutricional
-                </div>
-                <div class="nutrition-row" style="margin-bottom:0;">
-                    <div class="nutrition-card">
-                        <div class="nutrition-value">1.850</div>
-                        <div class="nutrition-label">Calorias</div>
-                    </div>
-                    <div class="nutrition-card">
-                        <div class="nutrition-value">140g</div>
-                        <div class="nutrition-label">Proteínas</div>
-                    </div>
-                    <div class="nutrition-card">
-                        <div class="nutrition-value">190g</div>
-                        <div class="nutrition-label">Carboidratos</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Eventos -->
-            <div class="card">
-                <div class="card-title">
-                    <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
-                    Próximos Eventos
-                </div>
-                <div class="event-item">
-                    <div class="event-date">SET<span>15</span></div>
-                    <div class="event-info">
-                        <div class="event-name">Desafio 30 Dias</div>
-                        <div class="event-detail">Inscrições abertas até dia 10</div>
-                    </div>
-                </div>
-                <div class="event-item">
-                    <div class="event-date">OUT<span>01</span></div>
-                    <div class="event-info">
-                        <div class="event-name">Avaliação Física Grátis</div>
-                        <div class="event-detail">Agende seu horário</div>
-                    </div>
-                </div>
-                <div class="event-item">
-                    <div class="event-date">OUT<span>20</span></div>
-                    <div class="event-info">
-                        <div class="event-name">Workshop Nutrição</div>
-                        <div class="event-detail">Com Nutricionista Convidado</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ========== FOOTER ========== -->
+        <!-- ========== RODAPÉ ========== -->
         <footer class="footer-dash">
             &copy; <span id="year"></span> Nome da Academia · Todos os direitos reservados.
         </footer>
@@ -1043,17 +486,6 @@
 
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Animar barras de progresso
-        const bars = document.querySelectorAll('.bar-fill');
-        const barObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.width = entry.target.getAttribute('data-width') + '%';
-                }
-            });
-        }, { threshold: 0.3 });
-        bars.forEach(bar => barObserver.observe(bar));
     </script>
 </body>
 </html>
